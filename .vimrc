@@ -270,3 +270,6 @@ endfu
 " http://winterdom.com/2008/08/molokaiforvim
 color solarized
 set background=dark
+
+" indent whole file
+nmap <leader>i gg=G''
