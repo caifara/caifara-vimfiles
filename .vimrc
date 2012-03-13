@@ -42,7 +42,7 @@ Bundle "kchmck/vim-coffee-script"
 " syntax fouten tonen (website is interessant!)
 Bundle "scrooloose/syntastic"
 Bundle "mattn/gist-vim"
-" Bundle "vim-scripts/AutoClose"
+Bundle "vim-scripts/AutoClose"
 " veranderen van naam en verder editten
 Bundle "vim-scripts/Rename2"
 " code browsing
@@ -273,3 +273,6 @@ set background=dark
 
 " indent whole file
 nmap <leader>i gg=G''
+
+" run ctags
+nmap <leader>t :call system("ctags -R .")
