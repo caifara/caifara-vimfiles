@@ -10,7 +10,7 @@ Bundle 'gmarik/vundle'
 
 Bundle "mileszs/ack.vim"
 Bundle "vim-scripts/Color-Sampler-Pack"
-" Bundle "http://conque.googlecode.com/files/conque_1.1.tar.gz"
+Bundle "vim-scripts/Conque-Shell"
 " Git
 Bundle "tpope/vim-fugitive"
 " haml and sass runtime files
@@ -59,6 +59,9 @@ Bundle "ap/vim-css-color"
 Bundle "seaofclouds/vim-colorx"
 Bundle "simplefold"
 Bundle "slimv.vim"
+" documentatie"
+Bundle "lucapette/vim-ruby-doc.git"
+Bundle "caifara/vim-ruby-run"
 
 set number
 set ruler
@@ -276,3 +279,6 @@ nmap <leader>i gg=G''
 
 " run ctags
 nmap <leader>t :call system("ctags -R .")
+
+" documentation uses osx style
+let g:ruby_doc_command='open'
