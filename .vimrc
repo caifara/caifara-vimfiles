@@ -270,7 +270,15 @@ set background=dark
 nmap <leader>i gg=G''
 
 " run ctags
-nmap <leader>t :call system("ctags -R .")
+nmap <leader>t :call system("ctags -R .")<CR>
 
 " documentation uses osx style
 let g:ruby_doc_command='open'
+
+" Command-/ to toggle comments
+map <leader>/ <plug>NERDCommenterToggle<CR>
+imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
+
+" ctrl-p shortcuts
+map <leader>t :CtrlP<CR>
+imap <leader>t <ESC>:CtrlP<CR>

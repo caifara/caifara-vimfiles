@@ -75,22 +75,22 @@ endif
 
 let g:ctrlp_map = ''
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
-  \ }
+      \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+      \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+      \ }
 
-if has("gui_macvim") && has("gui_running")
-  macmenu &File.New\ Tab key=<nop>
-  map <D-t> :CtrlP<CR>
-  imap <D-t> <ESC>:CtrlP<CR>
-  " call janus#add_mapping('ctrlp', 'map', '<D-t>', ':CtrlP<CR>')
-  " call janus#add_mapping('ctrlp', 'imap', '<D-t>', '<ESC>:CtrlP<CR>')
-else
-  map <C-t> :CtrlP<CR>
-  imap <C-t> <ESC>:CtrlP<CR>
-  " call janus#add_mapping('ctrlp', 'map', '<C-t>', ':CtrlP<CR>')
-  " call janus#add_mapping('ctrlp', 'imap', '<C-t>', '<ESC>:CtrlP<CR>')
-endif
+" if has("gui_macvim") && has("gui_running")
+"   macmenu &File.New\ Tab key=<nop>
+"   map <leader>t :CtrlP<CR>
+"   imap <leader>t <ESC>:CtrlP<CR>
+"   " call janus#add_mapping('ctrlp', 'map', '<D-t>', ':CtrlP<CR>')
+"   " call janus#add_mapping('ctrlp', 'imap', '<D-t>', '<ESC>:CtrlP<CR>')
+" else
+"   map <C-t> :CtrlP<CR>
+"   imap <C-t> <ESC>:CtrlP<CR>
+"   " call janus#add_mapping('ctrlp', 'map', '<C-t>', ':CtrlP<CR>')
+"   " call janus#add_mapping('ctrlp', 'imap', '<C-t>', '<ESC>:CtrlP<CR>')
+" endif
 
 " Don't beep
 set visualbell
@@ -233,7 +233,7 @@ function Edit(file)
 
   execute "e " . fnameescape(a:file)
 
-ruby << RUBY
+  ruby << RUBY
   destination = File.expand_path(VIM.evaluate(%{system("dirname " . shellescape(a:file, 1))}))
   pwd         = File.expand_path(Dir.pwd)
   home        = pwd == File.expand_path("~")
@@ -241,7 +241,7 @@ ruby << RUBY
   if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
     VIM.command(%{call ChangeDirectory(fnamemodify(a:file, ":h"), 0)})
   end
-RUBY
+  RUBY
 endfunction
 
 " Define the NERDTree-aware aliases
