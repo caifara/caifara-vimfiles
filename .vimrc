@@ -282,3 +282,7 @@ imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 " ctrl-p shortcuts
 map <leader>t :CtrlP<CR>
 imap <leader>t <ESC>:CtrlP<CR>
+
+" new tabs
+map <C-t> :tabnew<CR>
+imap <C-t> <ESC>:tabnew<CR>
