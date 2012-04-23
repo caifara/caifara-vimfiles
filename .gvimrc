@@ -11,6 +11,17 @@ if has("gui_macvim")
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
 
+
+  " andere mapping voor snipmate om de tab niet teveel te gebruiken
+  " "no <D-a> <c-r>=TriggerSnippet()<cr>
+  " "snor <D-a> <esc>i<right><c-r>=TriggerSnippet()<cr>
+
+  " command-enter to insert a line under cursor in edit mode (textmate alike)
+  map! <D-Enter> <Esc>o
+
+  " textmate mapping
+  imap <D-C> <Esc>:ColorHEX<CR>
+
   " Command-Shift-F for Ack
   map <D-F> :Ack<space>
 

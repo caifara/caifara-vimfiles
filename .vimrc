@@ -223,9 +223,6 @@ augroup Cucumber
     \ :nmap <leader>R :call Send_to_Screen("bundle exec cucumber -p s -t @r" . "\n")<CR>|
 augroup END
 
-" command-enter to insert a line under cursor in edit mode (textmate alike)
-map! <D-Enter> <Esc>o
-
 " specky
 let g:speckySpecSwitcherKey  = "<C-a>"
 
@@ -237,7 +234,6 @@ nmap  <C-]>
 
 " type hashrockets
 imap   => 
-imap <D-C> <Esc>:ColorHEX<CR>
 
 " standard ack command
 let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js"
@@ -249,10 +245,6 @@ fu! WriteCucumber()
 endfu
 :command! Wr :call WriteCucumber()
 nmap <leader>wr :call WriteCucumber()<CR>
-
-" andere mapping voor snipmate om de tab niet teveel te gebruiken
-no <D-a> <c-r>=TriggerSnippet()<cr>
-snor <D-a> <esc>i<right><c-r>=TriggerSnippet()<cr>
 
 set guioptions-=L
 set guioptions-=r
