@@ -62,6 +62,7 @@ Bundle "slimv.vim"
 " documentatie"
 Bundle "lucapette/vim-ruby-doc.git"
 Bundle "caifara/vim-ruby-run"
+Bundle "sjl/splice.vim"
 
 set number
 set ruler
