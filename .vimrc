@@ -12,7 +12,9 @@ Bundle "mileszs/ack.vim"
 Bundle "vim-scripts/Color-Sampler-Pack"
 Bundle "vim-scripts/Conque-Shell"
 " Git
-Bundle "tpope/vim-fugitive"
+" fugitive + splice : geen goed idee
+" https://github.com/sjl/splice.vim
+" Bundle "tpope/vim-fugitive"
 " haml and sass runtime files
 Bundle "tpope/vim-haml"
 " js indent
@@ -99,6 +101,7 @@ set noequalalways
 
 " set leader char
 let mapleader = ","
+let maplocalleader = "-"
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
@@ -108,7 +111,7 @@ map <Leader>n :NERDTreeToggle<CR>
 map <Leader><Leader> :ZoomWin<CR>
 
 " CTags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader>rt :!ctags --extra=+f --exclude=tmp -R *<CR><CR>
 map <C-\> :tnext<CR>
 
 " Remember last location in file
@@ -216,13 +219,21 @@ set term=builtin_ansi
 let g:slime={"sessionname": "slime", "windowname": "w0"}
 
 " run cucumber features in screen
-augroup Cucumber
-  au!
-  autocmd BufNewFile,BufReadPost,BufEnter *.feature
-    \ set filetype=cucumber|
-    \ :nmap <leader>r :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")<CR>|
-    \ :nmap <leader>R :call Send_to_Screen("bundle exec cucumber -p s -t @r" . "\n")<CR>|
-augroup END
+" augroup Cucumber
+"   au!
+"   autocmd BufNewFile,BufReadPost,BufEnter *.feature
+"     \ set filetype=cucumber|
+"     \ :nmap <leader>r :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")<CR>|
+"     \ :nmap <leader>R :call Send_to_Screen("bundle exec cucumber -p s -t @r" . "\n")<CR>|
+" augroup END
+
+" method to write all open files and exec cucumber on all @r tags
+" fu! WriteCucumber()
+"   :wall
+"   :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")
+" endfu
+" :command! Wr :call WriteCucumber()
+" nmap <leader>wr :call WriteCucumber()<CR>
 
 " specky
 let g:speckySpecSwitcherKey  = "<C-a>"
@@ -238,14 +249,6 @@ imap   =>
 
 " standard ack command
 let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js"
-
-" method to write all open files and exec cucumber on all @r tags
-fu! WriteCucumber()
-  :wall
-  :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")
-endfu
-:command! Wr :call WriteCucumber()
-nmap <leader>wr :call WriteCucumber()<CR>
 
 set guioptions-=L
 set guioptions-=r
@@ -271,7 +274,7 @@ set background=dark
 nmap <leader>i gg=G''
 
 " run ctags
-nmap <leader>t :call system("ctags -R .")<CR>
+nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=tmp -R *")<CR>
 
 " documentation uses osx style
 let g:ruby_doc_command='open'
