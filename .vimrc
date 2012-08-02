@@ -14,7 +14,7 @@ Bundle "vim-scripts/Conque-Shell"
 " Git
 " fugitive + splice : geen goed idee
 " https://github.com/sjl/splice.vim
-" Bundle "tpope/vim-fugitive"
+Bundle "tpope/vim-fugitive"
 " haml and sass runtime files
 Bundle "tpope/vim-haml"
 " js indent
@@ -64,7 +64,10 @@ Bundle "slimv.vim"
 " documentatie"
 Bundle "lucapette/vim-ruby-doc.git"
 Bundle "caifara/vim-ruby-run"
-Bundle "sjl/splice.vim"
+" Bundle "sjl/splice.vim"
+" speciale statusbar
+Bundle "Lokaltog/vim-powerline"
+
 
 set number
 set ruler
@@ -106,6 +109,7 @@ let maplocalleader = "-"
 " NERDTree configuration
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -117,7 +121,7 @@ map <C-\> :tnext<CR>
 " Remember last location in file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
+        \| exe "normal g'\"" | endif
 endif
 
 function s:setupWrapping()
@@ -269,12 +273,14 @@ endfu
 " http://winterdom.com/2008/08/molokaiforvim
 color solarized
 set background=dark
+" let g:Powerline_theme='skwp'
+let g:Powerline_colorscheme='skwp'
 
 " indent whole file
 nmap <leader>i gg=G''
 
 " run ctags
-nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=tmp -R *")<CR>
+nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=tmp --exclude=vendor --exclude=jasper -R *")<CR>
 
 " documentation uses osx style
 let g:ruby_doc_command='open'
@@ -290,3 +296,8 @@ imap <leader>t <ESC>:CtrlP<CR>
 " new tabs
 map <C-t> :tabnew<CR>
 imap <C-t> <ESC>:tabnew<CR>
+
+" powerline heeft dit nodig
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols='unicode'
