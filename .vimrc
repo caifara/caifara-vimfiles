@@ -44,6 +44,8 @@ Bundle "kchmck/vim-coffee-script"
 " syntax fouten tonen (website is interessant!)
 Bundle "scrooloose/syntastic"
 Bundle "mattn/gist-vim"
+" nodig voor gist-vim
+Bundle "mattn/webapi-vim"
 Bundle "vim-scripts/AutoClose"
 " veranderen van naam en verder editten
 Bundle "vim-scripts/Rename2"
@@ -63,10 +65,13 @@ Bundle "simplefold"
 Bundle "slimv.vim"
 " documentatie"
 Bundle "lucapette/vim-ruby-doc.git"
-Bundle "caifara/vim-ruby-run"
+" Bundle "caifara/vim-ruby-run"
+Bundle "henrik/vim-ruby-runner"
+" Werken met markdown (pandoc eigenlijk)
+Bundle "vim-pandoc/vim-pandoc"
 " Bundle "sjl/splice.vim"
 " speciale statusbar
-Bundle "Lokaltog/vim-powerline"
+" Bundle "Lokaltog/vim-powerline"
 
 
 set number
@@ -301,3 +306,9 @@ imap <C-t> <ESC>:tabnew<CR>
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_symbols='unicode'
+
+" 80 kols max
+set colorcolumn=80
+
+" customize vim startup
+autocmd VimEnter * NERDTree
