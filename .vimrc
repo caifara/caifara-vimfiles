@@ -72,7 +72,9 @@ Bundle "vim-pandoc/vim-pandoc"
 " Bundle "sjl/splice.vim"
 " speciale statusbar
 " Bundle "Lokaltog/vim-powerline"
-
+" Slime, maar dan voor tmux
+Bundle "jgdavey/tslime.vim"
+Bundle "jgdavey/vim-turbux"
 
 set number
 set ruler
@@ -257,7 +259,7 @@ nmap  <C-]>
 imap   => 
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js"
+let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml"
 
 set guioptions-=L
 set guioptions-=r
@@ -311,4 +313,29 @@ let g:Powerline_symbols='unicode'
 set colorcolumn=80
 
 " customize vim startup
-autocmd VimEnter * NERDTree
+" start nerdtree on startup
+" autocmd VimEnter * NERDTree
+
+" snellere testen
+" http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
+" command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+let g:no_turbux_mappings = 1 " eigen map gebruiken
+map <leader>s <Plug>SendTestToTmux
+map <leader>S <Plug>SendFocusedTestToTmux
+let g:tmux_sessionname = "0"
+let g:tmux_windowname = "tmux"
+let g:tmux_panenumber = "1"
+let g:turbux_command_prefix = "zeus"
+let g:turbux_command_cucumber = 'cucumber --require features'
+" function! ReloadAndTest(file)
+"   call Send_to_Tmux("load '".a:file."'\n")
+"   call SendTestToTmux(a:file)
+" endfunction
+
+" function! ReloadAndFocusedTest(file, line)
+"   call Send_to_Tmux("load '".a:file."'\n")
+"   call SendFocusedTestToTmux(a:file, a:line)
+" endfunction
+" map <leader>l :w<CR> :call ReloadAndTest(expand('%'))<CR> 
+" map <leader>L :w<CR> :call ReloadAndFocusedTest(expand('%'), line('.'))<CR> 
+set nohls
