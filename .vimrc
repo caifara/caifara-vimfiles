@@ -32,8 +32,7 @@ Bundle "timcharper/textile.vim"
 " alles rails (tem :A)
 Bundle "tpope/vim-rails"
 Bundle "vim-scripts/ZoomWin"
-" Bundle "msanders/snipmate.vim" " snippets zoals in textmate
-Bundle "tpope/vim-markdown"
+" Bundle "tpope/vim-markdown"
 " align blokken
 Bundle "tsaleh/vim-align"
 " Bundle "tpope/vim-unimpaired" " coole commando's voorlopig gebruik ik ze
@@ -61,20 +60,49 @@ Bundle "kien/ctrlp.vim"
 Bundle "ap/vim-css-color"
 " kleuren invoegen (:colorHex)
 Bundle "seaofclouds/vim-colorx"
-Bundle "simplefold"
-Bundle "slimv.vim"
+" Bundle "simplefold"
+" xml/html
+Bundle "othree/xml.vim"
+
+" voor lisp/clojure
+" Bundle "slimv.vim"
+Bundle "guns/vim-clojure-static"
+Bundle "kien/rainbow_parentheses.vim"
+Bundle "tpope/vim-fireplace"
+
 " documentatie"
 Bundle "lucapette/vim-ruby-doc.git"
 " Bundle "caifara/vim-ruby-run"
 Bundle "henrik/vim-ruby-runner"
 " Werken met markdown (pandoc eigenlijk)
-Bundle "vim-pandoc/vim-pandoc"
+" Bundle "vim-pandoc/vim-pandoc"
+Bundle "vim-pandoc/vim-pantondoc"
+Bundle "vim-pandoc/vim-pandoc-syntax"
 " Bundle "sjl/splice.vim"
 " speciale statusbar
 " Bundle "Lokaltog/vim-powerline"
 " Slime, maar dan voor tmux
 Bundle "jgdavey/tslime.vim"
 Bundle "jgdavey/vim-turbux"
+Bundle "slim-template/vim-slim"
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+
+" Betere lijnnummering
+" https://github.com/myusuf3/numbers.vim
+Bundle "myusuf3/numbers.vim" 
+
+" v om steeds meer te selecteren
+Bundle "terryma/vim-expand-region"
+" vmap v <Plug>(expand_region_expand)
+" vmap <C-v> <Plug>(expand_region_shrink)
+
+Bundle "mikewest/vimroom"
+
+" voor snipmate zijn volgende 4 lijnen nodig
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
 
 set number
 set ruler
@@ -111,7 +139,19 @@ set noequalalways
 
 " set leader char
 let mapleader = ","
+" let mapleader = "\<Space>"
 let maplocalleader = "-"
+
+" fast save file
+nnoremap <Leader>w :w<CR>
+
+" " copy paste naar clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
@@ -187,7 +227,7 @@ vmap <C-Down> ]egv
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
+let g:syntastic_quiet_messages = {'level': 'warnings'}
 
 " gist-vim defaults
 if has("mac")
@@ -224,8 +264,13 @@ map <C-l> <C-W>l
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 
+" https://github.com/neovim/neovim/issues/2048
+if has('nvim')
+  nmap <BS> <C-W>h
+endif
+
 " xterm not recognized right by vim
-set term=builtin_ansi
+" set term=builtin_ansi " fouten in 7.4
 
 let g:slime={"sessionname": "slime", "windowname": "w0"}
 
@@ -259,7 +304,7 @@ nmap  <C-]>
 imap   => 
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml"
+let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml --coffee"
 
 set guioptions-=L
 set guioptions-=r
@@ -294,15 +339,15 @@ let g:ruby_doc_command='open'
 
 " Command-/ to toggle comments
 map <leader>/ <plug>NERDCommenterToggle<CR>
-imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
+" imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " ctrl-p shortcuts
 map <leader>t :CtrlP<CR>
-imap <leader>t <ESC>:CtrlP<CR>
+" imap <leader>t <ESC>:CtrlP<CR>
 
 " new tabs
 map <C-t> :tabnew<CR>
-imap <C-t> <ESC>:tabnew<CR>
+" imap <C-t> <ESC>:tabnew<CR>
 
 " powerline heeft dit nodig
 set t_Co=256
@@ -320,22 +365,23 @@ set colorcolumn=80
 " http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
 " command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
 let g:no_turbux_mappings = 1 " eigen map gebruiken
-map <leader>s <Plug>SendTestToTmux
-map <leader>S <Plug>SendFocusedTestToTmux
+map <leader>S <Plug>SendTestToTmux
+map <leader>s <Plug>SendFocusedTestToTmux
 let g:tmux_sessionname = "0"
 let g:tmux_windowname = "tmux"
 let g:tmux_panenumber = "1"
 let g:turbux_command_prefix = "zeus"
 let g:turbux_command_cucumber = 'cucumber --require features'
-" function! ReloadAndTest(file)
-"   call Send_to_Tmux("load '".a:file."'\n")
-"   call SendTestToTmux(a:file)
-" endfunction
+vmap <C-c><C-c> <Plug>SendSelectionToTmux
 
-" function! ReloadAndFocusedTest(file, line)
-"   call Send_to_Tmux("load '".a:file."'\n")
-"   call SendFocusedTestToTmux(a:file, a:line)
-" endfunction
-" map <leader>l :w<CR> :call ReloadAndTest(expand('%'))<CR> 
-" map <leader>L :w<CR> :call ReloadAndFocusedTest(expand('%'), line('.'))<CR> 
 set nohls
+
+
+" om crontab edits mogelijk te maken
+
+set backupskip=/tmp/*,/private/tmp/*
+au BufNewFile,BufRead *.emblem set filetype=slim
+
+" number.vim
+nnoremap <F5> :NumbersToggle<CR>
+nnoremap <F6> :NumbersOnOff<CR>
