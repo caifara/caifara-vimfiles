@@ -1,115 +1,191 @@
 set nocompatible
-filetype off " voor vundle
+" filetype off " voor vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-
-Bundle "mileszs/ack.vim"
-Bundle "vim-scripts/Color-Sampler-Pack"
-Bundle "vim-scripts/Conque-Shell"
+Plug 'mileszs/ack.vim'
+Plug 'vim-scripts/Color-Sampler-Pack'
+Plug 'vim-scripts/Conque-Shell'
 " Git
 " fugitive + splice : geen goed idee
 " https://github.com/sjl/splice.vim
-Bundle "tpope/vim-fugitive"
+Plug 'tpope/vim-fugitive'
 " haml and sass runtime files
-Bundle "tpope/vim-haml"
+Plug 'tpope/vim-haml'
 " js indent
-Bundle "pangloss/vim-javascript"
-Bundle "ddollar/nerdcommenter"
-Bundle "scrooloose/nerdtree"
-Bundle "tpope/vim-surround"
+Plug 'pangloss/vim-javascript'
+Plug 'ddollar/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
 " vibrant ink achtige kleuren
-Bundle "tpope/vim-vividchalk"
-Bundle "altercation/vim-colors-solarized"
+Plug 'tpope/vim-vividchalk'
+Plug 'altercation/vim-colors-solarized'
+
 " autocomplete met tab
-Bundle "ervandew/supertab"
-Bundle "tpope/vim-cucumber"
-Bundle "timcharper/textile.vim"
+" Plug 'ervandew/supertab'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'fishbullet/deoplete-ruby'
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+" <C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
+" <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function() abort
+"   return deoplete#close_popup() . "\<CR>"
+" endfunction
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+Plug 'tpope/vim-cucumber'
+Plug 'timcharper/textile.vim'
 " alles rails (tem :A)
-Bundle "tpope/vim-rails"
-Bundle "vim-scripts/ZoomWin"
-" Bundle "tpope/vim-markdown"
+Plug 'tpope/vim-rails'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'vim-scripts/ZoomWin'
+" Plug 'tpope/vim-markdown'
 " align blokken
-Bundle "tsaleh/vim-align"
-" Bundle "tpope/vim-unimpaired" " coole commando's voorlopig gebruik ik ze
+Plug 'tsaleh/vim-align'
+" Plug 'tpope/vim-unimpaired' ' coole commando's voorlopig gebruik ik ze
 " niet
 " voeg 'end' toe in ruby waar nodig
-Bundle "tpope/vim-endwise"
-Bundle "kchmck/vim-coffee-script"
+Plug 'tpope/vim-endwise'
+Plug 'kchmck/vim-coffee-script'
 " syntax fouten tonen (website is interessant!)
-Bundle "scrooloose/syntastic"
-Bundle "mattn/gist-vim"
+" Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+
+" info git status
+Plug 'airblade/vim-gitgutter'
+
+Plug 'mattn/gist-vim'
 " nodig voor gist-vim
-Bundle "mattn/webapi-vim"
-Bundle "vim-scripts/AutoClose"
+Plug 'mattn/webapi-vim'
+" brackets automatisch sluiten
+" meer mogelijkheden hier: http://stackoverflow.com/questions/21316727/automatic-closing-brackets-for-vim
+" Plug 'cohama/lexima.vim'
+Plug 'Raimondi/delimitMate'
 " veranderen van naam en verder editten
-Bundle "vim-scripts/Rename2"
+Plug 'vim-scripts/Rename2'
 " code browsing
-Bundle "majutsushi/tagbar"
+Plug 'majutsushi/tagbar'
 " utilities, soms nodig voor andere plugings
-Bundle "tomtom/tlib_vim"
+Plug 'tomtom/tlib_vim'
 " undo tree
-Bundle "sjl/gundo.vim"
+Plug 'sjl/gundo.vim'
+
 "command t replacement
-Bundle "kien/ctrlp.vim"
+" Plug 'kien/ctrlp.vim'
+" fzf al via homebrew geïnstalleerd
+Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " markeren van kleuren in css bestanden in de juiste kleuren
-Bundle "ap/vim-css-color"
+Plug 'ap/vim-css-color'
 " kleuren invoegen (:colorHex)
-Bundle "seaofclouds/vim-colorx"
-" Bundle "simplefold"
+Plug 'seaofclouds/vim-colorx'
+" Plug 'simplefold'
 " xml/html
-Bundle "othree/xml.vim"
+Plug 'othree/xml.vim'
 
 " voor lisp/clojure
-" Bundle "slimv.vim"
-Bundle "guns/vim-clojure-static"
-Bundle "kien/rainbow_parentheses.vim"
-Bundle "tpope/vim-fireplace"
+" Plug 'slimv.vim'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fireplace'
 
-" documentatie"
-Bundle "lucapette/vim-ruby-doc.git"
-" Bundle "caifara/vim-ruby-run"
-Bundle "henrik/vim-ruby-runner"
+" voor elixir
+Plug 'elixir-lang/vim-elixir'
+
+" documentatie'
+Plug 'lucapette/vim-ruby-doc'
+" Plug 'caifara/vim-ruby-run'
+Plug 'henrik/vim-ruby-runner'
 " Werken met markdown (pandoc eigenlijk)
-" Bundle "vim-pandoc/vim-pandoc"
-Bundle "vim-pandoc/vim-pantondoc"
-Bundle "vim-pandoc/vim-pandoc-syntax"
-" Bundle "sjl/splice.vim"
-" speciale statusbar
-" Bundle "Lokaltog/vim-powerline"
+" Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pantondoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'sjl/splice.vim'
+
 " Slime, maar dan voor tmux
-Bundle "jgdavey/tslime.vim"
-Bundle "jgdavey/vim-turbux"
-Bundle "slim-template/vim-slim"
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
+Plug 'jgdavey/tslime.vim'
+Plug 'jgdavey/vim-turbux'
+Plug 'slim-template/vim-slim'
+Plug 'rizzatti/funcoo.vim'
+Plug 'rizzatti/dash.vim'
 
 " Betere lijnnummering
 " https://github.com/myusuf3/numbers.vim
-Bundle "myusuf3/numbers.vim" 
+Plug 'myusuf3/numbers.vim' 
 
 " v om steeds meer te selecteren
-Bundle "terryma/vim-expand-region"
+Plug 'terryma/vim-expand-region'
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
 
-Bundle "mikewest/vimroom"
+Plug 'mikewest/vimroom'
 
 " voor snipmate zijn volgende 4 lijnen nodig
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+" Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'garbas/vim-snipmate'
+" Plug 'honza/vim-snippets'
+
+" voor htmlbook
+Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
+
+" statusbar
+" Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" betere foldtext
+Plug 'Konfekt/FoldText'
+Plug 'Konfekt/FastFold'
+
+" multiple cursors, sublime style
+Plug 'terryma/vim-multiple-cursors'
+
+" tabellen maken https://github.com/dhruvasagar/vim-table-mode
+Plug 'dhruvasagar/vim-table-mode'
+
+Plug 'junegunn/rainbow_parentheses.vim'
+
+" Codi: interactieve irb shell
+Plug 'metakirby5/codi.vim'
+
+call plug#end()
+
+" Airline config
+let g:airline_powerline_fonts = 1
+let g:Powerline_symbols='unicode'
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols = {}
+" endif
+
+" " " unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+
 
 set number
-set ruler
-syntax on
-
-" Set encoding
-set encoding=utf-8
 
 " Whitespace stuff
 set nowrap
@@ -135,7 +211,7 @@ set laststatus=2
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
+" set noequalalways
 
 " set leader char
 let mapleader = ","
@@ -202,9 +278,6 @@ au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -214,7 +287,6 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Unimpaired configuration
@@ -274,26 +346,6 @@ endif
 
 let g:slime={"sessionname": "slime", "windowname": "w0"}
 
-" run cucumber features in screen
-" augroup Cucumber
-"   au!
-"   autocmd BufNewFile,BufReadPost,BufEnter *.feature
-"     \ set filetype=cucumber|
-"     \ :nmap <leader>r :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")<CR>|
-"     \ :nmap <leader>R :call Send_to_Screen("bundle exec cucumber -p s -t @r" . "\n")<CR>|
-" augroup END
-
-" method to write all open files and exec cucumber on all @r tags
-" fu! WriteCucumber()
-"   :wall
-"   :call Send_to_Screen("bundle exec cucumber -t @r" . "\n")
-" endfu
-" :command! Wr :call WriteCucumber()
-" nmap <leader>wr :call WriteCucumber()<CR>
-
-" specky
-let g:speckySpecSwitcherKey  = "<C-a>"
-
 " easier to reach 
 map ù :
 
@@ -304,12 +356,15 @@ nmap  <C-]>
 imap   => 
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml --coffee"
+let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml --coffee --css"
 
 set guioptions-=L
 set guioptions-=r
 set splitright
 set splitbelow
+
+" bestand bewaren -> neomake (syntax, rubycop)
+autocmd! BufWritePost * Neomake
 
 " ToggleFullScreen w aangeroepen in gvimrc
 fu! ToggleFullScreen()
@@ -322,11 +377,16 @@ fu! ToggleFullScreen()
   set invfu
 endfu
 
+if has('nvim')
+  set background=dark
+  let g:solarized_italic=0
+endif
+
 " http://winterdom.com/2008/08/molokaiforvim
 color solarized
 set background=dark
 " let g:Powerline_theme='skwp'
-let g:Powerline_colorscheme='skwp'
+" let g:Powerline_colorscheme='skwp'
 
 " indent whole file
 nmap <leader>i gg=G''
@@ -342,8 +402,8 @@ map <leader>/ <plug>NERDCommenterToggle<CR>
 " imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " ctrl-p shortcuts
-map <leader>t :CtrlP<CR>
-" imap <leader>t <ESC>:CtrlP<CR>
+" map <leader>t :CtrlP<CR>
+map <leader>t :FZF<CR>
 
 " new tabs
 map <C-t> :tabnew<CR>
@@ -369,7 +429,7 @@ map <leader>S <Plug>SendTestToTmux
 map <leader>s <Plug>SendFocusedTestToTmux
 let g:tmux_sessionname = "0"
 let g:tmux_windowname = "tmux"
-let g:tmux_panenumber = "1"
+" let g:tmux_panenumber = "1"
 let g:turbux_command_prefix = "zeus"
 let g:turbux_command_cucumber = 'cucumber --require features'
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
@@ -385,3 +445,54 @@ au BufNewFile,BufRead *.emblem set filetype=slim
 " number.vim
 nnoremap <F5> :NumbersToggle<CR>
 nnoremap <F6> :NumbersOnOff<CR>
+
+""
+" betere foldtext, samen met foldtext
+"
+" set foldmethod=syntax
+
+" { Syntax Folding
+  let g:vimsyn_folding='af'
+  let g:tex_fold_enabled=1
+  let g:xml_syntax_folding = 1
+  let g:clojure_fold = 1
+  let ruby_fold = 1
+  let perl_fold = 1
+  let perl_fold_blocks = 1
+" }
+
+set foldenable
+set foldlevel=0
+set foldlevelstart=0
+" specifies for which commands a fold will be opened
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+" hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
+hi Folded cterm=bold
+
+nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
+nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
+
+nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
+nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
+
+" Change Option Folds
+nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
+nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
+nmap     cof coz
+
+function! s:ToggleFoldcolumn(fold)
+  if &foldcolumn
+    let w:foldcolumn = &foldcolumn
+    silent setlocal foldcolumn=0
+    if a:fold | silent setlocal nofoldenable | endif
+  else
+      if exists('w:foldcolumn') && (w:foldcolumn!=0)
+        silent let &l:foldcolumn=w:foldcolumn
+      else
+        silent setlocal foldcolumn=4
+      endif
+      if a:fold | silent setlocal foldenable | endif
+  endif
+  setlocal foldcolumn?
+endfunction
+" klaar foldtext
