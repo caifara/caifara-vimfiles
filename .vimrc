@@ -356,7 +356,7 @@ nmap  <C-]>
 imap   => 
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ruby --java --js --yaml --coffee --css"
+let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=.wercker --ruby --java --js --yaml --coffee --css"
 
 set guioptions-=L
 set guioptions-=r
@@ -496,3 +496,13 @@ function! s:ToggleFoldcolumn(fold)
   setlocal foldcolumn?
 endfunction
 " klaar foldtext
+
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>l :PromoteToLet<cr>
