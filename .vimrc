@@ -10,6 +10,7 @@ Plug 'vim-scripts/Conque-Shell'
 " fugitive + splice : geen goed idee
 " https://github.com/sjl/splice.vim
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 " haml and sass runtime files
 Plug 'tpope/vim-haml'
 " js indent
@@ -45,11 +46,15 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-cucumber'
 Plug 'timcharper/textile.vim'
 " alles rails (tem :A)
 Plug 'tpope/vim-rails'
 Plug 'ecomba/vim-ruby-refactoring'
+" wisselen tss block/inline (ook vr hash) met gJ en gS
+Plug 'AndrewRadev/splitjoin.vim'
+
 Plug 'vim-scripts/ZoomWin'
 " Plug 'tpope/vim-markdown'
 " align blokken
@@ -123,7 +128,7 @@ Plug 'rizzatti/dash.vim'
 
 " Betere lijnnummering
 " https://github.com/myusuf3/numbers.vim
-Plug 'myusuf3/numbers.vim' 
+Plug 'myusuf3/numbers.vim'
 
 " v om steeds meer te selecteren
 Plug 'terryma/vim-expand-region'
@@ -142,8 +147,8 @@ Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
 
 " statusbar
 " Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 " betere foldtext
 Plug 'Konfekt/FoldText'
@@ -346,17 +351,17 @@ endif
 
 let g:slime={"sessionname": "slime", "windowname": "w0"}
 
-" easier to reach 
+" easier to reach
 map ù :
 
 " zoek tag onder de cursor
 nmap  <C-]>
 
 " type hashrockets
-imap   => 
+imap   =>
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=.wercker --ruby --java --js --yaml --coffee --css"
+let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=.wercker --ruby --java --js --yaml --coffee --css --elixir"
 
 set guioptions-=L
 set guioptions-=r
@@ -506,3 +511,16 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>l :PromoteToLet<cr>
+
+" https://github.com/Shougo/deoplete.nvim/issues/265#issuecomment-212978003
+function Multiple_cursors_before()
+  let g:deoplete#disable_auto_complete = 1
+endfunction
+function Multiple_cursors_after()
+  let g:deoplete#disable_auto_complete = 0
+endfunction
+
+" .arb bestanden zijn ruby bestanden
+augroup filetypedetect
+  au BufRead,BufNewFile *.arb set filetype=ruby
+augroup END
