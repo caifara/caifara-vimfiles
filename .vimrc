@@ -30,6 +30,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
+let g:python3_host_prog = '/Users/ivodancet/.pyenv/versions/neovim3/bin/python'
 
 " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
@@ -164,6 +165,13 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 " Codi: interactieve irb shell
 Plug 'metakirby5/codi.vim'
+let g:codi#rightalign = 0 " rechts uitlijnen zet alles naast scherm
+
+" markdown/writing, starten met :Pencil
+Plug 'reedes/vim-pencil'
+
+" ascii art editor
+Plug 'gyim/vim-boxdraw'
 
 call plug#end()
 
@@ -435,7 +443,8 @@ map <leader>s <Plug>SendFocusedTestToTmux
 let g:tmux_sessionname = "0"
 let g:tmux_windowname = "tmux"
 " let g:tmux_panenumber = "1"
-let g:turbux_command_prefix = "zeus"
+" let g:turbux_command_prefix = "zeus"
+let g:turbux_command_prefix = ""
 let g:turbux_command_cucumber = 'cucumber --require features'
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 
