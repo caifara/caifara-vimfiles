@@ -53,7 +53,7 @@ Plug 'timcharper/textile.vim'
 " alles rails (tem :A)
 Plug 'tpope/vim-rails'
 Plug 'ecomba/vim-ruby-refactoring'
-" wisselen tss block/inline (ook vr hash) met gJ en gS
+" wisselen tss block/inline (ook vr hash) met gJ en gS go-join, go-split
 Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'vim-scripts/ZoomWin'
@@ -443,8 +443,8 @@ map <leader>s <Plug>SendFocusedTestToTmux
 let g:tmux_sessionname = "0"
 let g:tmux_windowname = "tmux"
 " let g:tmux_panenumber = "1"
-" let g:turbux_command_prefix = "zeus"
 let g:turbux_command_prefix = ""
+let g:turbux_command_prefix = "zeus"
 let g:turbux_command_cucumber = 'cucumber --require features'
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 
