@@ -13,24 +13,70 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " haml and sass runtime files
 Plug 'tpope/vim-haml'
-" js indent
-Plug 'pangloss/vim-javascript'
+
+" Theme {{{
+  call plug#begin('~/.vim/plugged')
+  Plug 'altercation/vim-colors-solarized'
+  call plug#end()
+  " vibrant ink achtige kleuren
+  Plug 'tpope/vim-vividchalk'
+
+  if has('nvim')
+    set background=dark
+    let g:solarized_italic=0
+  endif
+
+  " http://winterdom.com/2008/08/molokaiforvim
+  color solarized
+  set background=dark
+  " let g:Powerline_theme='skwp'
+  " let g:Powerline_colorscheme='skwp'
+" }}}
+
+" javascript {{{
+  " js indent
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+
+  au FileType javascript set formatprg=prettier\ --stdin
+"  }}}
+
+" linter {{{
+  Plug 'w0rp/ale'
+  " Plug 'neomake/neomake'
+
+  " bestand bewaren -> neomake (syntax, rubycop)
+  " autocmd! BufWritePost * Neomake
+"  }}}
+
 Plug 'ddollar/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-" vibrant ink achtige kleuren
-Plug 'tpope/vim-vividchalk'
-Plug 'altercation/vim-colors-solarized'
 
-" autocomplete met tab
-" Plug 'ervandew/supertab'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'fishbullet/deoplete-ruby'
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" Use smartcase.
-let g:deoplete#enable_smart_case = 1
-let g:python3_host_prog = '/Users/ivodancet/.pyenv/versions/neovim3/bin/python'
+" Autocomplete {{{
+  " Plug 'ervandew/supertab'
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  let g:deoplete#enable_at_startup = 1
+
+  " javascript autocomplete plugin vr deoplete
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  " extra filetypes voor bovenstaande
+  let g:deoplete#sources#ternjs#filetypes = ['jsx']
+  " toon functie definitie
+  let g:deoplete#sources#ternjs#docs = 1
+  let g:deoplete#sources#ternjs#types = 1
+  " Plug 'Shougo/echodoc.vim'
+" }}}
+
+" " Use smartcase.
+" let g:deoplete#enable_smart_case = 1
+" let g:python3_host_prog = '/Users/ivodancet/.pyenv/versions/neovim3/bin/python'
 
 " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
@@ -67,7 +113,6 @@ Plug 'tpope/vim-endwise'
 Plug 'kchmck/vim-coffee-script'
 " syntax fouten tonen (website is interessant!)
 " Plug 'scrooloose/syntastic'
-Plug 'neomake/neomake'
 
 " info git status
 Plug 'airblade/vim-gitgutter'
@@ -88,17 +133,17 @@ Plug 'tomtom/tlib_vim'
 " undo tree
 Plug 'sjl/gundo.vim'
 
+" fuzzy find search
 "command t replacement
 " Plug 'kien/ctrlp.vim'
 " fzf al via homebrew geïnstalleerd
 Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf.vim'
 
 " markeren van kleuren in css bestanden in de juiste kleuren
 Plug 'ap/vim-css-color'
 " kleuren invoegen (:colorHex)
 Plug 'seaofclouds/vim-colorx'
-" Plug 'simplefold'
 " xml/html
 Plug 'othree/xml.vim'
 
@@ -151,9 +196,59 @@ Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-" betere foldtext
-Plug 'Konfekt/FoldText'
-Plug 'Konfekt/FastFold'
+" folding -------------------------- {{{
+  " Plug 'simplefold'
+  " betere foldtext
+  " Plug 'Konfekt/FoldText'
+  Plug 'Konfekt/FastFold'
+
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType javascript.jsx setlocal foldmethod=syntax
+  autocmd FileType javascript setlocal foldmethod=syntax
+
+  let g:vimsyn_folding='af'
+  let g:tex_fold_enabled=1
+  let g:xml_syntax_folding = 1
+  let g:clojure_fold = 1
+  let g:javaScript_fold = 1
+  let g:ruby_fold = 1
+
+  set foldenable
+  set foldlevel=0
+  set foldlevelstart=0
+  " specifies for which commands a fold will be opened
+  set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+  " hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
+  " hi Folded cterm=bold
+  hi Folded term=bold cterm=bold
+
+  nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
+  nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
+
+  nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
+  nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
+
+  " Change Option Folds
+  nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
+  nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
+  nmap     cof coz
+
+  function! s:ToggleFoldcolumn(fold)
+    if &foldcolumn
+      let w:foldcolumn = &foldcolumn
+      silent setlocal foldcolumn=0
+      if a:fold | silent setlocal nofoldenable | endif
+    else
+        if exists('w:foldcolumn') && (w:foldcolumn!=0)
+          silent let &l:foldcolumn=w:foldcolumn
+        else
+          silent setlocal foldcolumn=4
+        endif
+        if a:fold | silent setlocal foldenable | endif
+    endif
+    setlocal foldcolumn?
+  endfunction
+" }}}
 
 " multiple cursors, sublime style
 Plug 'terryma/vim-multiple-cursors'
@@ -171,7 +266,7 @@ let g:codi#rightalign = 0 " rechts uitlijnen zet alles naast scherm
 Plug 'reedes/vim-pencil'
 
 " ascii art editor
-Plug 'gyim/vim-boxdraw'
+" Plug 'gyim/vim-boxdraw'
 
 call plug#end()
 
@@ -332,7 +427,7 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
 " Turn off jslint errors by default
-let g:JSLintHighlightErrorLine = 0
+" let g:JSLintHighlightErrorLine = 0
 
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
@@ -369,15 +464,12 @@ nmap  <C-]>
 imap   =>
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=.wercker --ruby --java --js --yaml --coffee --css --elixir"
+let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir={.wercker,node_modules} --ruby --java --js --yaml --coffee --css --elixir"
 
 set guioptions-=L
 set guioptions-=r
 set splitright
 set splitbelow
-
-" bestand bewaren -> neomake (syntax, rubycop)
-autocmd! BufWritePost * Neomake
 
 " ToggleFullScreen w aangeroepen in gvimrc
 fu! ToggleFullScreen()
@@ -389,17 +481,6 @@ fu! ToggleFullScreen()
 
   set invfu
 endfu
-
-if has('nvim')
-  set background=dark
-  let g:solarized_italic=0
-endif
-
-" http://winterdom.com/2008/08/molokaiforvim
-color solarized
-set background=dark
-" let g:Powerline_theme='skwp'
-" let g:Powerline_colorscheme='skwp'
 
 " indent whole file
 nmap <leader>i gg=G''
@@ -417,6 +498,8 @@ map <leader>/ <plug>NERDCommenterToggle<CR>
 " ctrl-p shortcuts
 " map <leader>t :CtrlP<CR>
 map <leader>t :FZF<CR>
+" https://github.com/junegunn/fzf/issues/128
+nmap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
 " new tabs
 map <C-t> :tabnew<CR>
@@ -444,7 +527,6 @@ let g:tmux_sessionname = "0"
 let g:tmux_windowname = "tmux"
 " let g:tmux_panenumber = "1"
 let g:turbux_command_prefix = ""
-let g:turbux_command_prefix = "zeus"
 let g:turbux_command_cucumber = 'cucumber --require features'
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 
@@ -460,56 +542,10 @@ au BufNewFile,BufRead *.emblem set filetype=slim
 nnoremap <F5> :NumbersToggle<CR>
 nnoremap <F6> :NumbersOnOff<CR>
 
-""
-" betere foldtext, samen met foldtext
-"
-" set foldmethod=syntax
-
-" { Syntax Folding
-  let g:vimsyn_folding='af'
-  let g:tex_fold_enabled=1
-  let g:xml_syntax_folding = 1
-  let g:clojure_fold = 1
-  let ruby_fold = 1
-  let perl_fold = 1
-  let perl_fold_blocks = 1
-" }
-
-set foldenable
-set foldlevel=0
-set foldlevelstart=0
-" specifies for which commands a fold will be opened
-set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
-" hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
-hi Folded cterm=bold
-
-nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
-nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
-
-nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
-nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
-
-" Change Option Folds
-nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
-nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
-nmap     cof coz
-
-function! s:ToggleFoldcolumn(fold)
-  if &foldcolumn
-    let w:foldcolumn = &foldcolumn
-    silent setlocal foldcolumn=0
-    if a:fold | silent setlocal nofoldenable | endif
-  else
-      if exists('w:foldcolumn') && (w:foldcolumn!=0)
-        silent let &l:foldcolumn=w:foldcolumn
-      else
-        silent setlocal foldcolumn=4
-      endif
-      if a:fold | silent setlocal foldenable | endif
-  endif
-  setlocal foldcolumn?
-endfunction
-" klaar foldtext
+" use project specific vimrc viles
+" https://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc
+set secure
 
 function! PromoteToLet()
   :normal! dd
