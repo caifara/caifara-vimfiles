@@ -6,17 +6,25 @@ call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/Color-Sampler-Pack'
 Plug 'vim-scripts/Conque-Shell'
-" Git
-" fugitive + splice : geen goed idee
-" https://github.com/sjl/splice.vim
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+
+" Theme {{{
+  " Git
+  " fugitive + splice : geen goed idee
+  " https://github.com/sjl/splice.vim
+  Plug 'tpope/vim-fugitive'
+  " github extensie voor vim-fugitive
+  Plug 'tpope/vim-rhubarb'
+" }}}
+
 " haml and sass runtime files
 Plug 'tpope/vim-haml'
 
 " Theme {{{
-  call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
+  " Had moeten documenteren waarom volgende lijn hier moet staan :-(
+  " Normaal mag deze maar komen na alle Plug lijnen
+  " Hier probeer ik echter vimscript met plugs te mengen wat tot enkele
+  " problemen leidt.
   call plug#end()
   " vibrant ink achtige kleuren
   Plug 'tpope/vim-vividchalk'
@@ -52,6 +60,11 @@ Plug 'tpope/vim-haml'
 Plug 'ddollar/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
+
+" html {{{
+  Plug 'mattn/emmet-vim'
+" }}}
 
 " Autocomplete {{{
   " Plug 'ervandew/supertab'
@@ -196,60 +209,6 @@ Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-" folding -------------------------- {{{
-  " Plug 'simplefold'
-  " betere foldtext
-  " Plug 'Konfekt/FoldText'
-  Plug 'Konfekt/FastFold'
-
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType javascript.jsx setlocal foldmethod=syntax
-  autocmd FileType javascript setlocal foldmethod=syntax
-
-  let g:vimsyn_folding='af'
-  let g:tex_fold_enabled=1
-  let g:xml_syntax_folding = 1
-  let g:clojure_fold = 1
-  let g:javaScript_fold = 1
-  let g:ruby_fold = 1
-
-  set foldenable
-  set foldlevel=0
-  set foldlevelstart=0
-  " specifies for which commands a fold will be opened
-  set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
-  " hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
-  " hi Folded cterm=bold
-  hi Folded term=bold cterm=bold
-
-  nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
-  nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
-
-  nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
-  nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
-
-  " Change Option Folds
-  nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
-  nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
-  nmap     cof coz
-
-  function! s:ToggleFoldcolumn(fold)
-    if &foldcolumn
-      let w:foldcolumn = &foldcolumn
-      silent setlocal foldcolumn=0
-      if a:fold | silent setlocal nofoldenable | endif
-    else
-        if exists('w:foldcolumn') && (w:foldcolumn!=0)
-          silent let &l:foldcolumn=w:foldcolumn
-        else
-          silent setlocal foldcolumn=4
-        endif
-        if a:fold | silent setlocal foldenable | endif
-    endif
-    setlocal foldcolumn?
-  endfunction
-" }}}
-
 " multiple cursors, sublime style
 Plug 'terryma/vim-multiple-cursors'
 
@@ -346,8 +305,11 @@ let NERDTreeQuitOnOpen=1
 map <Leader><Leader> :ZoomWin<CR>
 
 " CTags
-map <Leader>rt :!ctags --extra=+f --exclude=tmp -R *<CR><CR>
+" nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=node_modules/* --exclude=.git --exclude=tmp/* --exclude=vendor/* --exclude=db/* --exclude=log/* -R *")<CR><CR>
+" maakt gebruik van ~/.ctags
+nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f -R *")<CR><CR>
 map <C-\> :tnext<CR>
+
 
 " Remember last location in file
 if has("autocmd")
@@ -485,9 +447,6 @@ endfu
 " indent whole file
 nmap <leader>i gg=G''
 
-" run ctags
-nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=tmp --exclude=vendor --exclude=jasper -R *")<CR>
-
 " documentation uses osx style
 let g:ruby_doc_command='open'
 
@@ -569,3 +528,58 @@ endfunction
 augroup filetypedetect
   au BufRead,BufNewFile *.arb set filetype=ruby
 augroup END
+
+" folding -------------------------- {{{
+  " Plug 'simplefold'
+  " betere foldtext
+  " Plug 'Konfekt/FoldText'
+  " Plug 'Konfekt/FastFold'
+
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd filetype javascript.jsx setlocal foldmethod=indent
+  autocmd FileType javascript setlocal foldmethod=syntax
+  autocmd FileType scss setlocal foldmethod=indent
+
+  let g:vimsyn_folding='af'
+  let g:tex_fold_enabled=1
+  let g:xml_syntax_folding = 1
+  let g:clojure_fold = 1
+  let g:javaScript_fold = 1
+  let g:ruby_fold = 1
+
+  set foldenable
+  set foldlevel=0
+  set foldlevelstart=0
+  " specifies for which commands a fold will be opened
+  set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+  " hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
+  " hi Folded cterm=bold
+  hi Folded term=bold cterm=bold
+
+  nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
+  nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
+
+  nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
+  nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
+
+  " Change Option Folds
+  nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
+  nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
+  nmap     cof coz
+
+  function! s:ToggleFoldcolumn(fold)
+    if &foldcolumn
+      let w:foldcolumn = &foldcolumn
+      silent setlocal foldcolumn=0
+      if a:fold | silent setlocal nofoldenable | endif
+    else
+        if exists('w:foldcolumn') && (w:foldcolumn!=0)
+          silent let &l:foldcolumn=w:foldcolumn
+        else
+          silent setlocal foldcolumn=4
+        endif
+        if a:fold | silent setlocal foldenable | endif
+    endif
+    setlocal foldcolumn?
+  endfunction
+" }}}
