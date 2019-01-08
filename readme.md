@@ -1,10 +1,12 @@
 # Install
 
-* `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+These vimfiles are for neovim only.
+
+* `brew install neovim`
+* install plug package manager: https://github.com/junegunn/vim-plug
 * `git clone git://github.com/caifara/caifara-vimfiles.git ~/vimfiles`
 * `cd ~`
-* `ln -s vimfiles/.vimrc .vimrc `
-* `ln -s .vimrc .nvimrc`
-* `ln -s vimfiles/.gvimrc .gvimrc`
-* `vim`
-* `:BundleInstall`
+* `mkdir -p ~/.config/nvim/`
+* `ln -s vimfiles/.vimrc ~/.config/nvim/init.vim `
+* `nvim`
+* `:PlugInstall`
