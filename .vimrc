@@ -150,8 +150,8 @@ Plug 'sjl/gundo.vim'
 "command t replacement
 " Plug 'kien/ctrlp.vim'
 " fzf al via homebrew geïnstalleerd
-Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " markeren van kleuren in css bestanden in de juiste kleuren
 Plug 'ap/vim-css-color'
