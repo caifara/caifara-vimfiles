@@ -10,3 +10,9 @@ These vimfiles are for neovim only.
 * `ln -s ~/vimfiles/.vimrc ~/.config/nvim/init.vim `
 * `nvim`
 * `:PlugInstall`
+
+# Dependencies
+
+* brew
+  * the_silver_searcher
+  * python3

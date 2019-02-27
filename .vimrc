@@ -3,7 +3,7 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim' " zoeken: werkt na brew install the_silver_searcher
 Plug 'vim-scripts/Color-Sampler-Pack'
 Plug 'vim-scripts/Conque-Shell'
 
@@ -426,7 +426,7 @@ nmap  <C-]>
 imap   =>
 
 " standard ack command
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir={.wercker,node_modules} --ruby --java --js --yaml --coffee --css --elixir"
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set guioptions-=L
 set guioptions-=r
