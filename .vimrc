@@ -67,24 +67,26 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 " }}}
 
 " Autocomplete {{{
-  " Plug 'ervandew/supertab'
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  let g:deoplete#enable_at_startup = 1
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
-  " javascript autocomplete plugin vr deoplete
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  " extra filetypes voor bovenstaande
-  let g:deoplete#sources#ternjs#filetypes = ['jsx']
-  " toon functie definitie
-  let g:deoplete#sources#ternjs#docs = 1
-  let g:deoplete#sources#ternjs#types = 1
-  " Plug 'Shougo/echodoc.vim'
+  " " Plug 'ervandew/supertab'
+  " if has('nvim')
+  "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " else
+  "   Plug 'Shougo/deoplete.nvim'
+  "   Plug 'roxma/nvim-yarp'
+  "   Plug 'roxma/vim-hug-neovim-rpc'
+  " endif
+  " let g:deoplete#enable_at_startup = 1
+
+  " " javascript autocomplete plugin vr deoplete
+  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  " " extra filetypes voor bovenstaande
+  " let g:deoplete#sources#ternjs#filetypes = ['jsx']
+  " " toon functie definitie
+  " let g:deoplete#sources#ternjs#docs = 1
+  " let g:deoplete#sources#ternjs#types = 1
+  " " Plug 'Shougo/echodoc.vim'
 " }}}
 
 " " Use smartcase.
@@ -426,7 +428,7 @@ nmap  <C-]>
 imap   =>
 
 " standard ack command
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --nogroup --nocolor --column --ignore-dir=doc'
 
 set guioptions-=L
 set guioptions-=r
@@ -456,7 +458,8 @@ map <leader>/ <plug>NERDCommenterToggle<CR>
 
 " ctrl-p shortcuts
 " map <leader>t :CtrlP<CR>
-map <leader>t :FZF<CR>
+" map <leader>t :FZF<CR>
+map <leader>t :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 " https://github.com/junegunn/fzf/issues/128
 nmap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
