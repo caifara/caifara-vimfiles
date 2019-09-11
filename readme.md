@@ -16,3 +16,5 @@ These vimfiles are for neovim only.
 * brew
   * the_silver_searcher
   * python3
+* `:healthcheck` in vim om te zien wat nog nodig is
+* gem rufo en mogelijks een `.rufo`

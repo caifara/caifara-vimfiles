@@ -49,8 +49,17 @@ Plug 'tpope/vim-haml'
   au FileType javascript set formatprg=prettier\ --stdin
 "  }}}
 
-" linter {{{
+" linter & fixer {{{
   Plug 'w0rp/ale'
+
+  " In ~/.vim/vimrc, or somewhere similar.
+  let g:ale_fixers = {
+        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \   'ruby': ['rufo'],
+        \}
+  let g:ale_ruby_rufo_options = "--filename=~/.rufo"
+  let g:ale_fix_on_save = 0
+
   " Plug 'neomake/neomake'
 
   " bestand bewaren -> neomake (syntax, rubycop)
@@ -586,3 +595,13 @@ augroup END
     setlocal foldcolumn?
   endfunction
 " }}}
+
+function! ToggleVerbose()
+  if !&verbose
+    set verbosefile=~/vim_verbose.log
+    set verbose=9
+  else
+    set verbose=0
+    set verbosefile=
+  endif
+endfunction
