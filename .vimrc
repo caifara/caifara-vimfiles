@@ -44,7 +44,7 @@ Plug 'tpope/vim-haml'
 " javascript {{{
   " js indent
   Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
+  Plug 'MaxMEllon/vim-jsx-pretty'
 
   au FileType javascript set formatprg=prettier\ --stdin
 "  }}}
@@ -52,18 +52,12 @@ Plug 'tpope/vim-haml'
 " linter & fixer {{{
   Plug 'w0rp/ale'
 
-  " In ~/.vim/vimrc, or somewhere similar.
   let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'ruby': ['rufo'],
         \}
   let g:ale_ruby_rufo_options = "--filename=~/.rufo"
   let g:ale_fix_on_save = 0
-
-  " Plug 'neomake/neomake'
-
-  " bestand bewaren -> neomake (syntax, rubycop)
-  " autocmd! BufWritePost * Neomake
 "  }}}
 
 Plug 'ddollar/nerdcommenter'
@@ -77,41 +71,12 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 
 " Autocomplete {{{
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-
-  " " Plug 'ervandew/supertab'
-  " if has('nvim')
-  "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " else
-  "   Plug 'Shougo/deoplete.nvim'
-  "   Plug 'roxma/nvim-yarp'
-  "   Plug 'roxma/vim-hug-neovim-rpc'
-  " endif
-  " let g:deoplete#enable_at_startup = 1
-
-  " " javascript autocomplete plugin vr deoplete
-  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  " " extra filetypes voor bovenstaande
-  " let g:deoplete#sources#ternjs#filetypes = ['jsx']
-  " " toon functie definitie
-  " let g:deoplete#sources#ternjs#docs = 1
-  " let g:deoplete#sources#ternjs#types = 1
-  " " Plug 'Shougo/echodoc.vim'
+  nmap t :call CocAction("doHover")<CR>
+  " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet 
+  nmap <leader>F  <Plug>(coc-format)
 " }}}
 
 " " Use smartcase.
-" let g:deoplete#enable_smart_case = 1
-" let g:python3_host_prog = '/Users/ivodancet/.pyenv/versions/neovim3/bin/python'
-
-" <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-" <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function() abort
-"   return deoplete#close_popup() . "\<CR>"
-" endfunction
-" deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 
@@ -234,6 +199,8 @@ let g:codi#rightalign = 0 " rechts uitlijnen zet alles naast scherm
 
 " markdown/writing, starten met :Pencil
 Plug 'reedes/vim-pencil'
+
+Plug 'sotte/presenting.vim'
 
 " ascii art editor
 " Plug 'gyim/vim-boxdraw'
