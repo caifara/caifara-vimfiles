@@ -82,7 +82,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-/vim-ruby'
 Plug 'tpope/vim-cucumber'
 Plug 'timcharper/textile.vim'
 " alles rails (tem :A)
@@ -154,9 +154,6 @@ Plug 'vim-pandoc/vim-pantondoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'sjl/splice.vim'
 
-" Slime, maar dan voor tmux
-Plug 'jgdavey/tslime.vim'
-Plug 'jgdavey/vim-turbux'
 Plug 'slim-template/vim-slim'
 Plug 'rizzatti/funcoo.vim'
 Plug 'rizzatti/dash.vim'
@@ -192,6 +189,10 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'junegunn/rainbow_parentheses.vim'
+
+" Slime, maar dan voor tmux
+Plug 'jgdavey/tslime.vim'
+Plug 'jgdavey/vim-turbux'
 
 " Codi: interactieve irb shell
 Plug 'metakirby5/codi.vim'
@@ -455,18 +456,25 @@ set colorcolumn=80
 " start nerdtree on startup
 " autocmd VimEnter * NERDTree
 
-" snellere testen
-" http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
-" command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
-let g:no_turbux_mappings = 1 " eigen map gebruiken
-map <leader>S <Plug>SendTestToTmux
-map <leader>s <Plug>SendFocusedTestToTmux
-let g:tmux_sessionname = "0"
-let g:tmux_windowname = "tmux"
-" let g:tmux_panenumber = "1"
-let g:turbux_command_prefix = ""
-let g:turbux_command_cucumber = 'cucumber --require features'
-vmap <C-c><C-c> <Plug>SendSelectionToTmux
+" Testen draaien {{{
+
+  " snellere testen
+  " http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
+  " command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+  let g:no_turbux_mappings = 1 " eigen map gebruiken
+  map <leader>S <Plug>SendTestToTmux
+  map <leader>s <Plug>SendFocusedTestToTmux
+  let g:tmux_sessionname = "0"
+  let g:tmux_windowname = "tmux"
+  " let g:tmux_panenumber = "1"
+  let g:turbux_command_prefix = ""
+  let g:turbux_command_cucumber = 'cucumber --require features'
+  vmap <C-c><C-c> <Plug>SendSelectionToTmux
+
+  " Indien rspec ingesteld is om de testen te evalueren naar quickfix
+  " kan je quickfix laden met ,q
+  map <leader>q :cg quickfix.out \| cwindow<CR>
+" }}}
 
 set nohls
 
