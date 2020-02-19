@@ -55,9 +55,13 @@ Plug 'tpope/vim-haml'
   let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'ruby': ['rufo'],
+        \   'javascript': ['prettier', 'eslint'],
+        \   'javascriptreact': ['prettier']
         \}
+  let g:ale_javascript_prettier_options = "--no-semi"
+  let g:ale_javascript_eslint_options = ''
   let g:ale_ruby_rufo_options = "--filename=~/.rufo"
-  let g:ale_fix_on_save = 0
+  let g:ale_fix_on_save = 1
 "  }}}
 
 Plug 'ddollar/nerdcommenter'
@@ -69,10 +73,15 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
   Plug 'mattn/emmet-vim'
 " }}}
 
+" json {{{
+  Plug 'elzr/vim-json'
+" }}}
+
+
 " Autocomplete {{{
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   nmap t :call CocAction("doHover")<CR>
-  " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet 
+  " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet
   nmap <leader>F  <Plug>(coc-format)
 " }}}
 
@@ -82,7 +91,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
-Plug 'vim-/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-cucumber'
 Plug 'timcharper/textile.vim'
 " alles rails (tem :A)
@@ -183,7 +192,8 @@ Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
 " Plug 'vim-airline/vim-airline-themes'
 
 " multiple cursors, sublime style
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 
 " tabellen maken https://github.com/dhruvasagar/vim-table-mode
 Plug 'dhruvasagar/vim-table-mode'
@@ -316,9 +326,6 @@ au BufRead,BufNewFile {Gemfile,Guardfile,Rakefile,Vagrantfile,Thorfile,config.ru
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
-" add json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
-
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
@@ -340,11 +347,11 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Unimpaired configuration
 " Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
+" nmap <C-Up> [e
+" nmap <C-Down> ]e
 " Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+" vmap <C-Up> [egv
+" vmap <C-Down> ]egv
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
@@ -456,6 +463,7 @@ set colorcolumn=80
 " start nerdtree on startup
 " autocmd VimEnter * NERDTree
 
+
 " Testen draaien {{{
 
   " snellere testen
@@ -520,7 +528,7 @@ augroup END
   " Plug 'simplefold'
   " betere foldtext
   " Plug 'Konfekt/FoldText'
-  " Plug 'Konfekt/FastFold'
+  Plug 'Konfekt/FastFold'
 
   autocmd FileType vim setlocal foldmethod=marker
   autocmd filetype javascript.jsx setlocal foldmethod=indent
@@ -580,3 +588,9 @@ function! ToggleVerbose()
     set verbosefile=
   endif
 endfunction
+
+" Firefox integratie {{{
+  " Firefox extensie nodig
+  " https://github.com/glacambre/firenvim
+  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" }}}
