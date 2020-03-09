@@ -534,6 +534,7 @@ augroup END
   autocmd filetype javascript.jsx setlocal foldmethod=indent
   autocmd FileType javascript setlocal foldmethod=syntax
   autocmd FileType scss setlocal foldmethod=indent
+  autocmd FileType ruby setlocal foldmethod=syntax
 
   let g:vimsyn_folding='af'
   let g:tex_fold_enabled=1
@@ -594,3 +595,5 @@ endfunction
   " https://github.com/glacambre/firenvim
   Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
+
+call plug#end()
