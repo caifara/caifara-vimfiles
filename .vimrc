@@ -1,6 +1,11 @@
 set nocompatible
 " filetype off " voor vundle
 
+" set leader char
+let mapleader = ","
+" let mapleader = "\<Space>"
+let maplocalleader = "-"
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'mileszs/ack.vim' " zoeken: werkt na brew install the_silver_searcher
@@ -65,7 +70,6 @@ Plug 'tpope/vim-haml'
 "  }}}
 
 Plug 'ddollar/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 
@@ -77,6 +81,10 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
   Plug 'elzr/vim-json'
 " }}}
 
+" icoontjes {{{
+  " Moet vermeld worden NA de plugins die er gebruik van maken
+  Plug 'ryanoasis/vim-devicons'
+" }}}
 
 " Autocomplete {{{
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -216,11 +224,18 @@ Plug 'sotte/presenting.vim'
 " ascii art editor
 " Plug 'gyim/vim-boxdraw'
 
+" filetree {{{
+  Plug 'preservim/nerdtree'
+  let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+  map <Leader>n :NERDTreeToggle<CR>
+  let NERDTreeQuitOnOpen=1
+" }}}
+
 call plug#end()
 
 " Airline config
-let g:airline_powerline_fonts = 1
-let g:Powerline_symbols='unicode'
+" let g:airline_powerline_fonts = 1
+" let g:Powerline_symbols='unicode'
 " if !exists('g:airline_symbols')
 "     let g:airline_symbols = {}
 " endif
@@ -238,8 +253,6 @@ let g:Powerline_symbols='unicode'
 " let g:airline_symbols.paste = 'Þ'
 " let g:airline_symbols.paste = '∥'
 " let g:airline_symbols.whitespace = 'Ξ'
-
-
 
 set number
 
@@ -269,11 +282,6 @@ set laststatus=2
 " This is likely a bludgeon to solve some other issue, but it works
 " set noequalalways
 
-" set leader char
-let mapleader = ","
-" let mapleader = "\<Space>"
-let maplocalleader = "-"
-
 " fast save file
 nnoremap <Leader>w :w<CR>
 
@@ -284,11 +292,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-" NERDTree configuration
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen=1
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -520,7 +523,7 @@ function Multiple_cursors_after()
 endfunction
 
 " .arb bestanden zijn ruby bestanden
-augroup filetypedetect
+augroup filetypedetecters
   au BufRead,BufNewFile *.arb set filetype=ruby
 augroup END
 
@@ -578,6 +581,12 @@ augroup END
     endif
     setlocal foldcolumn?
   endfunction
+" }}}
+
+" Visuals -------------------------- {{{
+  " volgende foutmelding houdt bug tegen (oplossing helpt niet bij mij)
+  " https://github.com/wellle/context.vim/issues/32
+  " Plug 'wellle/context.vim'
 " }}}
 
 function! ToggleVerbose()
