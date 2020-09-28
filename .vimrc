@@ -87,7 +87,7 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 " }}}
 
 " Autocomplete {{{
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap t :call CocAction("doHover")<CR>
   " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet
   nmap <leader>F  <Plug>(coc-format)
