@@ -63,6 +63,9 @@ Plug 'tpope/vim-haml'
         \   'javascript': ['prettier', 'eslint'],
         \   'javascriptreact': ['prettier']
         \}
+  let g:ale_linters = {
+        \   'ruby': ['rubocop']
+        \}
   let g:ale_javascript_prettier_options = "--no-semi"
   let g:ale_javascript_eslint_options = ''
   let g:ale_ruby_rufo_options = "--filename=~/.rufo"
@@ -192,7 +195,7 @@ Plug 'mikewest/vimroom'
 " Plug 'honza/vim-snippets'
 
 " voor htmlbook
-Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
+" Plug 'file:///Users/caifara/Documents/by2.be/open_source/vim-htmlbook'
 
 " statusbar
 " Plug 'bling/vim-airline'
@@ -263,12 +266,6 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set list listchars=tab:\ \ ,trail:·
-
-" Searching
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
 
 " Tab completion
 set wildmode=list:longest,list:full
@@ -475,20 +472,19 @@ set colorcolumn=80
   let g:no_turbux_mappings = 1 " eigen map gebruiken
   map <leader>S <Plug>SendTestToTmux
   map <leader>s <Plug>SendFocusedTestToTmux
-  let g:tmux_sessionname = "0"
-  let g:tmux_windowname = "tmux"
+  " onderstaande hebben gn effect: alles zit in g:tslime (vb:
+  " g:tslime['window'])
+  " let g:tmux_sessionname = "0"
+  " let g:tmux_windowname = "tmux"
   " let g:tmux_panenumber = "1"
   let g:turbux_command_prefix = ""
   let g:turbux_command_cucumber = 'cucumber --require features'
   vmap <C-c><C-c> <Plug>SendSelectionToTmux
 
   " Indien rspec ingesteld is om de testen te evalueren naar quickfix
-  " kan je quickfix laden met ,q
-  map <leader>q :cg quickfix.out \| cwindow<CR>
+  " kan je quickfix laden met ,r (van rspec)
+  map <leader>r :cg quickfix.out \| cwindow<CR>
 " }}}
-
-set nohls
-
 
 " om crontab edits mogelijk te maken
 
@@ -599,24 +595,37 @@ function! ToggleVerbose()
   endif
 endfunction
 
-" Easymotion {{{
+" Searching and Easymotion {{{
+  set nohls " geen search highlight
+  set incsearch
+  set ignorecase
+  set smartcase
 
-  Plug 'easymotion/vim-easymotion'
+  " Plug 'easymotion/vim-easymotion'
 
-  let g:EasyMotion_do_mapping = 0 " Disable default mappings
+  " let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-  " Jump to anywhere you want with minimal keystrokes, with just one key binding.
-  " `s{char}{char}{label}`
-  nmap s <Plug>(easymotion-overwin-f2)
+  " " 2 char zoeken
+  " " Jump to anywhere you want with minimal keystrokes, with just one key binding.
+  " " `s{char}{char}{label}`
+  " nmap s <Plug>(easymotion-overwin-f2)
 
-  " Turn on case-insensitive feature
-  let g:EasyMotion_smartcase = 1
+  " " Turn on case-insensitive feature
+  " let g:EasyMotion_smartcase = 1
 
-  " JK motions: Line motions
-  map <Leader>j <Plug>(easymotion-j)
-  map <Leader>k <Plug>(easymotion-k)
+  " " JK motions: Line motions
+  " map <Leader>j <Plug>(easymotion-j)
+  " map <Leader>k <Plug>(easymotion-k)
 
+  " n char zoeken
+  " map  / <Plug>(easymotion-sn)
+  " omap / <Plug>(easymotion-tn)
+  " let g:EasyMotion_off_screen_search = 1 " Search whole buffer
 " }}}
 
 
 call plug#end()
+
+" gutter had plots verkeerde kleuren
+" https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
+highlight clear SignColumn
