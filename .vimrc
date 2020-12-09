@@ -50,6 +50,13 @@ Plug 'tpope/vim-haml'
   " js indent
   Plug 'pangloss/vim-javascript'
   Plug 'MaxMEllon/vim-jsx-pretty'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug 'jparise/vim-graphql'
+
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
   au FileType javascript set formatprg=prettier\ --stdin
 "  }}}
@@ -61,14 +68,14 @@ Plug 'tpope/vim-haml'
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'ruby': ['rufo'],
         \   'javascript': ['prettier', 'eslint'],
-        \   'javascriptreact': ['prettier']
+        \   'javascriptreact': ['prettier'],
+        \   'typescript': ['prettier', 'eslint'],
+        \   'typescriptreact': ['prettier', 'eslint'],
         \}
   let g:ale_linters = {
         \   'ruby': ['rubocop']
         \}
-  let g:ale_javascript_prettier_options = "--no-semi"
   let g:ale_javascript_eslint_options = ''
-  let g:ale_ruby_rufo_options = "--filename=~/.rufo"
   let g:ale_fix_on_save = 1
 "  }}}
 
@@ -92,8 +99,15 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 " Autocomplete {{{
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap t :call CocAction("doHover")<CR>
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gr <Plug>(coc-references)
   " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet
   nmap <leader>F  <Plug>(coc-format)
+  let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-solargraph'
+  \ ]
 " }}}
 
 " " Use smartcase.
@@ -532,6 +546,8 @@ augroup END
   autocmd FileType vim setlocal foldmethod=marker
   autocmd filetype javascript.jsx setlocal foldmethod=indent
   autocmd FileType javascript setlocal foldmethod=syntax
+  autocmd filetype typescript setlocal foldmethod=syntax
+  autocmd FileType typescript.tsx setlocal foldmethod=syntax
   autocmd FileType scss setlocal foldmethod=indent
   autocmd FileType ruby setlocal foldmethod=syntax
 
@@ -621,6 +637,15 @@ endfunction
   " map  / <Plug>(easymotion-sn)
   " omap / <Plug>(easymotion-tn)
   " let g:EasyMotion_off_screen_search = 1 " Search whole buffer
+" }}}
+
+" tabbar {{{
+  noremap <Leader><Left>  :tabmove -1<CR>
+  noremap <Leader><Right> :tabmove +1<CR>
+" }}}
+
+" Sessie bewaren {{{
+  Plug 'tpope/vim-obsession'
 " }}}
 
 
