@@ -76,6 +76,7 @@ Plug 'tpope/vim-haml'
         \   'ruby': ['rubocop']
         \}
   let g:ale_javascript_eslint_options = ''
+  let g:ale_ruby_rufo_options = '--filename=.rufo'
   let g:ale_fix_on_save = 1
 "  }}}
 
