@@ -47,38 +47,46 @@ Plug 'tpope/vim-haml'
 " }}}
 
 " javascript {{{
-  " js indent
   Plug 'pangloss/vim-javascript'
   Plug 'MaxMEllon/vim-jsx-pretty'
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-  Plug 'jparise/vim-graphql'
 
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
-  au FileType javascript set formatprg=prettier\ --stdin
+  " au FileType javascript set formatprg=prettier\ --stdin
 "  }}}
 
 " linter & fixer {{{
-  Plug 'w0rp/ale'
+  Plug 'sbdchd/neoformat'
 
-  let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'ruby': ['rufo'],
-        \   'javascript': ['prettier', 'eslint'],
-        \   'javascriptreact': ['prettier'],
-        \   'typescript': ['prettier', 'eslint'],
-        \   'typescriptreact': ['prettier', 'eslint'],
-        \}
-  let g:ale_linters = {
-        \   'ruby': ['rubocop']
-        \}
-  let g:ale_javascript_eslint_options = ''
-  let g:ale_ruby_rufo_options = '--filename=.rufo'
-  let g:ale_fix_on_save = 1
+  let g:neoformat_enabled_ruby = ['rufo']
+
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+  augroup END
+
+  " Plug 'caifara/ale'
+
+  " let g:ale_fixers = {
+  "       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  "       \   'ruby': ['rufo'],
+  "       \}
+  " let g:ale_linters = {
+  "       \   'ruby': ['rubocop']
+  "       \}
+  " let g:ale_ruby_rufo_options = '--filename=.rufo'
+  " let g:ale_fix_on_save = 1
+  " let g:ale_disable_lsp = 1
 "  }}}
+"
+" postcss {{{
+Plug 'stephenway/postcss.vim'
+au BufRead,BufNewFile *.pcss set filetype=postcss
+" }}}
 
 Plug 'ddollar/nerdcommenter'
 Plug 'tpope/vim-surround'
@@ -97,18 +105,37 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
   Plug 'ryanoasis/vim-devicons'
 " }}}
 
-" Autocomplete {{{
+" LSP {{{
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap t :call CocAction("doHover")<CR>
+  " go to definition
   nmap <silent> gd <Plug>(coc-definition)
+  " go to type definition
   nmap <silent> gy <Plug>(coc-type-definition)
+  " list all references
   nmap <silent> gr <Plug>(coc-references)
   " nmap <leader>f  <Plug>(coc-format-selected) " werkt niet
   nmap <leader>F  <Plug>(coc-format)
+  " action menu
+  nmap <leader>a <Plug>(coc-codeaction)
+  " action menu voor geselecteerde items
+  xmap <leader>a <Plug>(coc-codeaction-selected)
+  " rename
+  nmap <leader>rn <Plug>(coc-rename)
   let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-solargraph'
   \ ]
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+    let g:coc_global_extensions += ['coc-prettier']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+    let g:coc_global_extensions += ['coc-eslint']
+  endif
+
+  let g:coc_global_extensions = ['coc-stylelintplus']
 " }}}
 
 " " Use smartcase.
@@ -225,10 +252,6 @@ Plug 'mg979/vim-visual-multi'
 Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'junegunn/rainbow_parentheses.vim'
-
-" Slime, maar dan voor tmux
-Plug 'jgdavey/tslime.vim'
-Plug 'jgdavey/vim-turbux'
 
 " Codi: interactieve irb shell
 Plug 'metakirby5/codi.vim'
@@ -480,6 +503,9 @@ set colorcolumn=80
 
 
 " Testen draaien {{{
+  " Slime, maar dan voor tmux
+  Plug 'jgdavey/tslime.vim'
+  Plug 'jgdavey/vim-turbux'
 
   " snellere testen
   " http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
@@ -649,6 +675,8 @@ endfunction
   Plug 'tpope/vim-obsession'
 " }}}
 
+" vimscript specs
+Plug 'junegunn/vader.vim'
 
 call plug#end()
 
