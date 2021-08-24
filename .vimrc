@@ -12,8 +12,7 @@ Plug 'mileszs/ack.vim' " zoeken: werkt na brew install the_silver_searcher
 Plug 'vim-scripts/Color-Sampler-Pack'
 Plug 'vim-scripts/Conque-Shell'
 
-" Theme {{{
-  " Git
+" Git {{{
   " fugitive + splice : geen goed idee
   " https://github.com/sjl/splice.vim
   Plug 'tpope/vim-fugitive'
@@ -24,26 +23,32 @@ Plug 'vim-scripts/Conque-Shell'
 " haml and sass runtime files
 Plug 'tpope/vim-haml'
 
-" Theme {{{
-  Plug 'altercation/vim-colors-solarized'
+" Theme/treesitter {{{
+  " Plug 'altercation/vim-colors-solarized'
   " Had moeten documenteren waarom volgende lijn hier moet staan :-(
   " Normaal mag deze maar komen na alle Plug lijnen
   " Hier probeer ik echter vimscript met plugs te mengen wat tot enkele
   " problemen leidt.
-  call plug#end()
+  " call plug#end()
   " vibrant ink achtige kleuren
-  Plug 'tpope/vim-vividchalk'
+  " Plug 'tpope/vim-vividchalk'
 
-  if has('nvim')
-    set background=dark
-    let g:solarized_italic=0
-  endif
+  " set background=dark
+  " let g:solarized_italic=0
 
   " http://winterdom.com/2008/08/molokaiforvim
-  color solarized
-  set background=dark
+  " color solarized
+  " set background=dark
   " let g:Powerline_theme='skwp'
   " let g:Powerline_colorscheme='skwp'
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/playground'
+
+  Plug 'tjdevries/colorbuddy.vim'
+  Plug 'Th3Whit3Wolf/onebuddy'
+  Plug 'ishan9299/modus-theme-vim'
+  Plug 'Th3Whit3Wolf/spacebuddy'
 " }}}
 
 " javascript {{{
@@ -59,14 +64,15 @@ Plug 'tpope/vim-haml'
   " au FileType javascript set formatprg=prettier\ --stdin
 "  }}}
 
-" linter & fixer {{{
+" fixer {{{
   Plug 'sbdchd/neoformat'
 
   let g:neoformat_enabled_ruby = ['rufo']
 
   augroup fmt
     autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
+    " autocmd BufWritePre * undojoin | Neoformat
+    autocmd BufWritePre * Neoformat
   augroup END
 
   " Plug 'caifara/ale'
@@ -91,6 +97,21 @@ au BufRead,BufNewFile *.pcss set filetype=postcss
 Plug 'ddollar/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
+
+" vimroom {{{
+  Plug 'junegunn/goyo.vim' " writeroom, gebruik :Goyo
+
+  function! Vimroom()
+    set linebreak
+    set nonumber
+    set wrap
+    set norelativenumber
+    set nonumber
+    Goyo
+  endfunction
+
+  command Vimroom call Vimroom()
+" }}}
 
 " html {{{
   Plug 'mattn/emmet-vim'
@@ -136,6 +157,9 @@ Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
   endif
 
   let g:coc_global_extensions = ['coc-stylelintplus']
+
+  " tagbar aan zijkant: :Vista
+  Plug 'liuchengxu/vista.vim'
 " }}}
 
 " " Use smartcase.
@@ -153,14 +177,13 @@ Plug 'ecomba/vim-ruby-refactoring'
 " wisselen tss block/inline (ook vr hash) met gJ en gS go-join, go-split
 Plug 'AndrewRadev/splitjoin.vim'
 
-Plug 'vim-scripts/ZoomWin'
 " Plug 'tpope/vim-markdown'
 " align blokken
 Plug 'tsaleh/vim-align'
 " Plug 'tpope/vim-unimpaired' ' coole commando's voorlopig gebruik ik ze
 " niet
 " voeg 'end' toe in ruby waar nodig
-Plug 'tpope/vim-endwise'
+Plug 'windwp/nvim-autopairs'
 Plug 'kchmck/vim-coffee-script'
 " syntax fouten tonen (website is interessant!)
 " Plug 'scrooloose/syntastic'
@@ -177,8 +200,6 @@ Plug 'mattn/webapi-vim'
 Plug 'Raimondi/delimitMate'
 " veranderen van naam en verder editten
 Plug 'vim-scripts/Rename2'
-" code browsing
-Plug 'majutsushi/tagbar'
 " utilities, soms nodig voor andere plugings
 Plug 'tomtom/tlib_vim'
 " undo tree
@@ -193,8 +214,8 @@ Plug 'junegunn/fzf.vim'
 
 " markeren van kleuren in css bestanden in de juiste kleuren
 Plug 'ap/vim-css-color'
-" kleuren invoegen (:colorHex)
-Plug 'seaofclouds/vim-colorx'
+" kleuren invoegen (:VCoolor)
+Plug 'KabbAmine/vCoolor.vim'
 " xml/html
 Plug 'othree/xml.vim'
 
@@ -228,8 +249,6 @@ Plug 'myusuf3/numbers.vim'
 Plug 'terryma/vim-expand-region'
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
-
-Plug 'mikewest/vimroom'
 
 " voor snipmate zijn volgende 4 lijnen nodig
 " Plug 'MarcWeber/vim-addon-mw-utils'
@@ -269,10 +288,12 @@ Plug 'sotte/presenting.vim'
   Plug 'preservim/nerdtree'
   let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
   map <Leader>n :NERDTreeToggle<CR>
+  nmap <Leader>m :NERDTreeFind<CR>
   let NERDTreeQuitOnOpen=1
 " }}}
 
 call plug#end()
+
 
 " Airline config
 " let g:airline_powerline_fonts = 1
@@ -312,11 +333,6 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 " Status bar
 set laststatus=2
 
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-" set noequalalways
-
 " fast save file
 nnoremap <Leader>w :w<CR>
 
@@ -327,9 +343,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-" ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
 
 " CTags
 " nmap <leader>rt :call system("/usr/local/bin/ctags --extra=+f --exclude=node_modules/* --exclude=.git --exclude=tmp/* --exclude=vendor/* --exclude=db/* --exclude=log/* -R *")<CR><CR>
@@ -344,27 +357,11 @@ if has("autocmd")
         \| exe "normal g'\"" | endif
 endif
 
-function s:setupWrapping()
-  set wrap
-  set wrapmargin=2
-  set textwidth=72
-endfunction
-
-function s:setupMarkup()
-  call s:setupWrapping()
-  map <buffer> <Leader>p :Hammer<CR>
-endfunction
-
 " make uses real tabs
 au FileType make set noexpandtab
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Guardfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-
-au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
@@ -435,11 +432,6 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-" xterm not recognized right by vim
-" set term=builtin_ansi " fouten in 7.4
-
-let g:slime={"sessionname": "slime", "windowname": "w0"}
-
 " easier to reach
 map ù :
 
@@ -503,10 +495,11 @@ set colorcolumn=80
 
 
 " Testen draaien {{{
-  " Slime, maar dan voor tmux
   Plug 'jgdavey/tslime.vim'
-  Plug 'jgdavey/vim-turbux'
+  let g:tslime_always_current_session = 1
+  " let g:tslime_always_current_window = 1
 
+  Plug 'jgdavey/vim-turbux'
   " snellere testen
   " http://velvetpulse.com/2012/11/19/improve-your-ruby-workflow-by-integrating-vim-tmux-pry/
   " command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
@@ -570,20 +563,23 @@ augroup END
   " Plug 'Konfekt/FoldText'
   Plug 'Konfekt/FastFold'
 
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd filetype javascript.jsx setlocal foldmethod=indent
-  autocmd FileType javascript setlocal foldmethod=syntax
-  autocmd filetype typescript setlocal foldmethod=syntax
-  autocmd FileType typescript.tsx setlocal foldmethod=syntax
-  autocmd FileType scss setlocal foldmethod=indent
-  autocmd FileType ruby setlocal foldmethod=syntax
+  set foldexpr=nvim_treesitter#foldexpr()
 
-  let g:vimsyn_folding='af'
-  let g:tex_fold_enabled=1
-  let g:xml_syntax_folding = 1
-  let g:clojure_fold = 1
-  let g:javaScript_fold = 1
-  let g:ruby_fold = 1
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd filetype javascript.jsx setlocal foldmethod=expr
+  autocmd FileType javascript setlocal foldmethod=expr
+  autocmd filetype typescript setlocal foldmethod=expr
+  autocmd FileType typescript.tsx setlocal foldmethod=expr
+  autocmd FileType typescriptreact setlocal foldmethod=expr
+  autocmd FileType ruby setlocal foldmethod=expr
+  " autocmd FileType scss setlocal foldmethod=indent
+
+  " let g:vimsyn_folding='af'
+  " let g:tex_fold_enabled=1
+  " let g:xml_syntax_folding = 1
+  " let g:clojure_fold = 1
+  " let g:javaScript_fold = 1
+  " let g:ruby_fold = 1
 
   set foldenable
   set foldlevel=0
@@ -591,35 +587,35 @@ augroup END
   " specifies for which commands a fold will be opened
   set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
   " hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
-  " hi Folded cterm=bold
+  hi Folded cterm=bold
   hi Folded term=bold cterm=bold
 
-  nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
-  nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
+  " nnoremap <silent> zr zr:<c-u>setlocal foldlevel?<CR>
+  " nnoremap <silent> zm zm:<c-u>setlocal foldlevel?<CR>
 
-  nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
-  nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
+  " nnoremap <silent> zR zR:<c-u>setlocal foldlevel?<CR>
+  " nnoremap <silent> zM zM:<c-u>setlocal foldlevel?<CR>
 
-  " Change Option Folds
-  nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
-  nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
-  nmap     cof coz
+  " " Change Option Folds
+  " nnoremap zi  :<c-u>call <SID>ToggleFoldcolumn(1)<CR>
+  " nnoremap coz :<c-u>call <SID>ToggleFoldcolumn(0)<CR>
+  " nmap     cof coz
 
-  function! s:ToggleFoldcolumn(fold)
-    if &foldcolumn
-      let w:foldcolumn = &foldcolumn
-      silent setlocal foldcolumn=0
-      if a:fold | silent setlocal nofoldenable | endif
-    else
-        if exists('w:foldcolumn') && (w:foldcolumn!=0)
-          silent let &l:foldcolumn=w:foldcolumn
-        else
-          silent setlocal foldcolumn=4
-        endif
-        if a:fold | silent setlocal foldenable | endif
-    endif
-    setlocal foldcolumn?
-  endfunction
+  " function! s:ToggleFoldcolumn(fold)
+  "   if &foldcolumn
+  "     let w:foldcolumn = &foldcolumn
+  "     silent setlocal foldcolumn=0
+  "     if a:fold | silent setlocal nofoldenable | endif
+  "   else
+  "       if exists('w:foldcolumn') && (w:foldcolumn!=0)
+  "         silent let &l:foldcolumn=w:foldcolumn
+  "       else
+  "         silent setlocal foldcolumn=4
+  "       endif
+  "       if a:fold | silent setlocal foldenable | endif
+  "   endif
+  "   setlocal foldcolumn?
+  " endfunction
 " }}}
 
 " Visuals -------------------------- {{{
@@ -679,6 +675,49 @@ endfunction
 Plug 'junegunn/vader.vim'
 
 call plug#end()
+
+" colorscheme
+lua require('colorbuddy').colorscheme('onebuddy')
+" lua require('colorbuddy').colorscheme('spacebuddy')
+" lua vim.cmd('colorscheme modus-operandi')
+
+" treesitter setup
+lua <<EOF
+  require'nvim-treesitter.configs'.setup {
+    indent = { enable = true }
+  }
+EOF
+
+lua << EOF
+  require "nvim-treesitter.configs".setup {
+    playground = {
+      enable = true,
+      disable = {},
+      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+      persist_queries = false -- Whether the query persists across vim sessions
+    }
+  }
+EOF
+
+  " lua <<EOF
+  "   require'nvim-treesitter.configs'.setup {
+  "     incremental_selection = {
+  "       enable = true,
+  "       keymaps = {
+  "         init_selection = "gnn",
+  "         node_incremental = "grn",
+  "         scope_incremental = "grc",
+  "         node_decremental = "grm",
+  "       },
+  "     },
+  "   }
+  " EOF
+
+  lua <<EOF
+    require'nvim-treesitter.configs'.setup {
+      highlight = { enable = true },
+    }
+EOF
 
 " gutter had plots verkeerde kleuren
 " https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
