@@ -4,9 +4,17 @@
   "solargraph.formatting": true,
   "solargraph.hover": true,
   "solargraph.logLevel": "debug",
+
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
   "prettier.disableSuccessMessage": true,
+
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
@@ -14,5 +22,6 @@
     "typescriptreact"
   ],
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true,
+
+  "coc.preferences.formatOnType": true
 }
