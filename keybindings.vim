@@ -1,6 +1,6 @@
 " Indien rspec ingesteld is om de testen te evalueren naar quickfix
 " kan je quickfix laden met ,r (van rspec)
-map <leader>r :cg quickfix.out \| cwindow<CR>
+" map <leader>r :cg quickfix.out \| cwindow<CR>
 
 map <C-t> :tabnew<CR>
 " imap <C-t> <ESC>:tabnew<CR>
@@ -25,3 +25,9 @@ nmap  <C-]>
 
 " type hashrockets
 imap   =>
+
+" scroll coc floating window
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+nnoremap t :call CocAction('doHover')<CR>

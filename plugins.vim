@@ -13,11 +13,21 @@ Plug 'tpope/vim-haml' " haml and sass runtime files
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
-Plug 'tjdevries/colorbuddy.vim'
-Plug 'Th3Whit3Wolf/onebuddy'
-Plug 'ishan9299/modus-theme-vim'
-Plug 'Th3Whit3Wolf/spacebuddy'
+" {{{ colorschemes
+" Plug 'tjdevries/colorbuddy.vim'
+" Plug 'Th3Whit3Wolf/onebuddy'
+" Plug 'ishan9299/modus-theme-vim'
+" Plug 'Th3Whit3Wolf/spacebuddy'
+
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
+" }}}
+
+" {{{ debugging
+Plug 'mfussenegger/nvim-dap'
+" }}}
 
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -42,6 +52,7 @@ Plug 'elzr/vim-json'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'xiyaowong/coc-lightbulb'
 
 " tagbar aan zijkant: :Vista
 Plug 'liuchengxu/vista.vim'
@@ -91,6 +102,11 @@ Plug 'sjl/gundo.vim'
 " fzf al via homebrew geïnstalleerd
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'fannheyward/telescope-coc.nvim'
 
 " markeren van kleuren in css bestanden in de juiste kleuren
 Plug 'ap/vim-css-color'

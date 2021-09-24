@@ -7,6 +7,7 @@ let mapleader = ","
 let maplocalleader = " "
 
 set number
+set mouse=a
 
 " Whitespace stuff
 set nowrap
@@ -51,10 +52,14 @@ set colorcolumn=80
 " https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
 highlight clear SignColumn
 
-" colorscheme
-lua require('colorbuddy').colorscheme('onebuddy')
+" {{{ colorscheme
+" lua require('colorbuddy').colorscheme('onebuddy')
 " lua require('colorbuddy').colorscheme('spacebuddy')
 " lua vim.cmd('colorscheme modus-operandi')
+set termguicolors
+let g:gruvbox_invert_selection=0
+colorscheme gruvbox
+" }}}
 
 " Remember last location in file
 if has("autocmd")
@@ -83,4 +88,4 @@ set backupskip=/tmp/*,/private/tmp/*
 
 set clipboard+=unnamedplus
 
-set timeoutlen=500
+set timeoutlen=1000

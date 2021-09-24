@@ -39,23 +39,39 @@ wk.setup{
 
 
 local keymap = {
-  t = {":call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>", 'fzf'},
-  n = {':NERDTreeToggle<CR>', 'nerdtree'},
+  a = { "<Plug>(coc-codeaction)", "code [a]ction" },
+  r = { "<Plug>(coc-rename)", "[c]hange name (rename)" },
+
   m = {':NERDTreeFind<CR>', 'nerdtree'},
+  n = {':NERDTreeToggle<CR>', 'nerdtree'},
+  -- t = {":call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>", 'fzf'},
+  t = {":Telescope git_files<CR>", 'fzf'},
+  p = {":Telescope live_grep<CR>", 'project wide search'},
+  P = {":lua require'telescope.builtin'.grep_string()<CR>", "project wide search word under cursor"},
   l = {
     name = "lsp",
-    d = { "<Plug>(coc-definition)", "definition" },
-    y = { "<Plug>(coc-type-definition)", "type definition" },
-    r = { "<Plug>(coc-references)", "references" },
-    f = { "<Plug>(coc-format-selected)", "format" },
-    h = { ":call CocAction('doHover')<CR>", "hover" },
     a = { "<Plug>(coc-codeaction)", "code [a]ction" },
     c = { "<Plug>(coc-rename)", "[c]hange name (rename)" },
+    d = { "<Plug>(coc-definition)", "definition" },
+    f = { "<Plug>(coc-format-selected)", "format" },
+    h = { ":call CocAction('doHover')<CR>", "hover" },
+    p = { ":call CocAction('jumpDefinition', v:false)<CR>", "Peek definition" },
+    r = { ":Telescope coc references<CR>", "references" },
+    y = { "<Plug>(coc-type-definition)", "type definition" },
+  },
+  d = {
+    name = "debug adapter protocol",
+    b = { ":lua require'dap'.toggle_breakpoint()<CR>", "set breakpoint" },
+    c = { ":lua require'dap'.continue()<CR>", "start/continue" },
+    so = { ":lua require'dap'.step_over()<CR>", "step over"},
+    si = { ":lua require'dap'.step_into()<CR>", "step into"},
+    r = { ":lua require'dap'.step_into()<CR>", "repl"},
   },
   ["/"] = {":CommentToggle<CR>", "comment line"}
 }
 
 local x_keymap = {
+  a = { "<Plug>(coc-codeaction-selected)", "coc code action"},
   l =  {
     name = "lsp",
     a = { "<Plug>(coc-codeaction-selected)", "coc code action"}
@@ -66,8 +82,20 @@ wk.register(keymap, {prefix= "<leader>"})
 wk.register(x_keymap, {prefix = "<leader>", mode = "x"})
 
 local local_keymap = {
-  l = {':PromoteToLet<CR>', 'promote to let'}
+  l = {':PromoteToLet<CR>', 'promote to let'},
+  c = {':LogUnderCursor<CR>', 'log word under cursor (js)'}
 }
 
 wk.register(local_keymap, {prefix="<localleader>"})
 
+local keymap = {
+  d = { "<Plug>(coc-definition)", "definition" },
+  D = {
+    name = "open definition",
+    t = { ":call CocAction('jumpDefinition', 'tabe')<CR>", "in tab" },
+    s = { ":call CocAction('jumpDefinition', 'split')<CR>", "in split" },
+    v = { ":call CocAction('jumpDefinition', 'vsplit')<CR>", "in vsplit" },
+  },
+  r = { ":Telescope coc references<CR>", "references" },
+}
+wk.register(keymap, {prefix= "g"})

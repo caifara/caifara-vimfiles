@@ -16,3 +16,16 @@ function! PromoteToLet()
   :normal ==
 endfunction
 command! PromoteToLet :call PromoteToLet()
+
+" generates a 'console.log(<word>)'
+function! LogUnderCursor()
+  :normal! yiw
+  :normal! o
+  :normal! o
+  :normal! iconsole.log(
+  :normal! p
+  :normal! a)
+  :normal ==
+  :normal! o
+endfunction
+command! LogUnderCursor :call LogUnderCursor()

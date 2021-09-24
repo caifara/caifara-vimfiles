@@ -7,6 +7,9 @@ runtime keybindings.vim
 lua require('plugin.which-key-setup')
 lua require('plugin.nvim-treesitter')
 lua require('plugin.nvim-comment')
+lua require('plugin.telescope')
+lua require('plugin.nvim-dap')
+lua require('plugin.nvim-treesitter-textobjects')
 
 " nodig?
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
