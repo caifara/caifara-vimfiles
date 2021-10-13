@@ -45,6 +45,7 @@ local keymap = {
   m = {':NERDTreeFind<CR>', 'nerdtree'},
   n = {':NERDTreeToggle<CR>', 'nerdtree'},
   -- t = {":call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>", 'fzf'},
+  f = {":CocFix<CR>", 'quick[f]ix'},
   t = {":Telescope git_files<CR>", 'fzf'},
   p = {":Telescope live_grep<CR>", 'project wide search'},
   P = {":lua require'telescope.builtin'.grep_string()<CR>", "project wide search word under cursor"},
