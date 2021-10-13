@@ -29,3 +29,5 @@ function! LogUnderCursor()
   :normal! o
 endfunction
 command! LogUnderCursor :call LogUnderCursor()
+
+command! GBlame :call Git blame
