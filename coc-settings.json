@@ -5,7 +5,7 @@
   "solargraph.hover": true,
   "solargraph.logLevel": "debug",
 
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.filetypes": [
     "javascript",
     "javascriptreact",

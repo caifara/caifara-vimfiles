@@ -27,3 +27,11 @@ augroup filetypedetecters
   " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
   au BufRead,BufNewFile {Gemfile,Guardfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 augroup END
+
+" https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+

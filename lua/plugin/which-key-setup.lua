@@ -49,6 +49,8 @@ local keymap = {
   t = {":Telescope git_files<CR>", 'fzf'},
   p = {":Telescope live_grep<CR>", 'project wide search'},
   P = {":lua require'telescope.builtin'.grep_string()<CR>", "project wide search word under cursor"},
+  s = {"<Plug>SendFocusedTestToTmux", "project wide search word under cursor"},
+  S = {"<Plug>SendTestToTmux", "project wide search word under cursor"},
   l = {
     name = "lsp",
     a = { "<Plug>(coc-codeaction)", "code [a]ction" },
@@ -71,6 +73,8 @@ local keymap = {
   ["/"] = {":CommentToggle<CR>", "comment line"}
 }
 
+wk.register(keymap, {prefix= "<leader>"})
+
 local x_keymap = {
   a = { "<Plug>(coc-codeaction-selected)", "coc code action"},
   l =  {
@@ -79,17 +83,26 @@ local x_keymap = {
   }
 }
 
-wk.register(keymap, {prefix= "<leader>"})
+local visual_keymap = {
+  s = { ":lua require('spectre').open_visual()<CR>", "search/replace word under cursor" }
+}
+
 wk.register(x_keymap, {prefix = "<leader>", mode = "x"})
 
 local local_keymap = {
   l = {':PromoteToLet<CR>', 'promote to let'},
-  c = {':LogUnderCursor<CR>', 'log word under cursor (js)'}
+  c = {':LogUnderCursor<CR>', 'log word under cursor (js)'},
+  s = {
+    name = "spectre",
+    s = {":lua require('spectre').open()<CR>", "project wide search/replace"},
+    w = {":lua require('spectre').open_visual({select_word=true})<CR>", "search "},
+    p = {"viw:lua require('spectre').open_file_search()<CR>", "search in current file"},
+  },
 }
 
 wk.register(local_keymap, {prefix="<localleader>"})
 
-local keymap = {
+local g_keymap = {
   d = { "<Plug>(coc-definition)", "definition" },
   D = {
     name = "open definition",
@@ -99,4 +112,4 @@ local keymap = {
   },
   r = { ":Telescope coc references<CR>", "references" },
 }
-wk.register(keymap, {prefix= "g"})
+wk.register(g_keymap, {prefix= "g"})

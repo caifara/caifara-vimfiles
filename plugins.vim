@@ -39,7 +39,7 @@ Plug 'sbdchd/neoformat'
 
 Plug 'stephenway/postcss.vim'
 
-Plug 'terrortylor/nvim-comment'
+Plug 'winston0410/commented.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
 
@@ -174,5 +174,7 @@ Plug 'tpope/vim-obsession'
 Plug 'junegunn/vader.vim'
 
 Plug 'folke/which-key.nvim'
+
+Plug 'windwp/nvim-spectre'
 
 call plug#end()

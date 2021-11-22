@@ -9,6 +9,16 @@ noremap <Leader><Right> :tabmove +1<CR>
 
 noremap <Leader>n :NERDTreeToggle<CR>
 
+" terminal mode mappings
+" exit terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" To use `ALT+{h,j,k,l}` to navigate windows from any mode: >
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+
 map <C-\> :tnext<CR>
 
 " Move to other windows in split window mode
