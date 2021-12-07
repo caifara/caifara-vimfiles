@@ -6,10 +6,12 @@ runtime keybindings.vim
 
 lua require('plugin.which-key-setup')
 lua require('plugin.nvim-treesitter')
-lua require('plugin.commented')
+lua require('plugin.comment')
 lua require('plugin.telescope')
 lua require('plugin.nvim-dap')
 lua require('plugin.nvim-treesitter-textobjects')
+lua require('plugin.nvim-ts-rainbow')
+lua require('plugin.octo')
 
 " nodig?
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
