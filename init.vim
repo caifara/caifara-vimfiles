@@ -12,6 +12,7 @@ lua require('plugin.nvim-dap')
 lua require('plugin.nvim-treesitter-textobjects')
 lua require('plugin.nvim-ts-rainbow')
 lua require('plugin.octo')
+lua require('plugin.nvim-autopairs')
 
 " nodig?
 " MacVIM shift+arrow-keys behavior (required in .vimrc)

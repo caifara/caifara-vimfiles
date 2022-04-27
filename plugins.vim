@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-treesitter/playground'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'p00f/nvim-ts-rainbow' " rainbow parentheses, treesitter versie
+  Plug 'mizlan/iswap.nvim' " swap argumenten, array dingen enz :ISwap
 
   Plug 'sbdchd/neoformat'
 

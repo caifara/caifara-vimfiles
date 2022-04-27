@@ -21,6 +21,7 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 
 map <C-\> :tnext<CR>
 
+
 " Move to other windows in split window mode
 map <C-h> <C-W>h
 map <C-l> <C-W>l
@@ -32,6 +33,8 @@ map ù :
 
 " zoek tag onder de cursor
 nmap  <C-]>
+
+nmap Y yy
 
 " type hashrockets
 imap   =>

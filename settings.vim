@@ -86,6 +86,6 @@ set secure
 
 set backupskip=/tmp/*,/private/tmp/*
 
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 set timeoutlen=1000

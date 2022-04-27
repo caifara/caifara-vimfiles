@@ -42,8 +42,12 @@ local keymap = {
   a = { "<Plug>(coc-codeaction)", "code [a]ction" },
   r = { "<Plug>(coc-rename)", "[c]hange name (rename)" },
 
-  m = {':NERDTreeFind<CR>', 'nerdtree'},
+  N = {':NERDTreeFind<CR>', 'nerdtree'},
   n = {':NERDTreeToggle<CR>', 'nerdtree'},
+
+  i = {':ISwap<CR>', 'ISwap'},
+  I = {':ISwapWith<CR>', 'ISwap (onder cursor)'},
+
   -- t = {":call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>", 'fzf'},
   f = {":CocFix<CR>", 'quick[f]ix'},
   t = {":Telescope git_files<CR>", 'fzf'},

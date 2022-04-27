@@ -23,5 +23,16 @@
   ],
   "tsserver.formatOnType": true,
 
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+
+  "languageserver": {
+    "sorbet": {
+      "command": "srb",
+      "args": ["tc", "--lsp", "--enable-all-experimental-lsp-features"],
+      "filetypes": ["ruby"],
+      "rootPatterns": ["sorbet/config"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }

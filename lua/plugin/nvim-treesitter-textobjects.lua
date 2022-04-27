@@ -1,5 +1,14 @@
 require'nvim-treesitter.configs'.setup {
   textobjects = {
+    -- swap = {
+    --   enable = true,
+    --   swap_next = {
+    --     ["<leader>m"] = "@parameter.inner",
+    --   },
+    --   swap_previous = {
+    --     ["<leader>M"] = "@parameter.inner",
+    --   },
+    -- },
     select = {
       enable = true,
 
@@ -12,6 +21,8 @@ require'nvim-treesitter.configs'.setup {
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
 
         -- -- Or you can define your own textobjects like this
         -- ["iF"] = {
