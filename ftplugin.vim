@@ -18,8 +18,8 @@ autocmd FileType json setlocal foldmethod=syntax
 
 " project specifieke autocommands
 augroup projectAutocommands
-  autocmd BufNewFile,BufEnter */lichtvis* :let g:turbux_command_prefix = "bin/spring"
-  autocmd BufNewFile,BufEnter */brightbook* :let g:turbux_command_prefix = "bin/spring"
+  autocmd BufNewFile,BufEnter */lichtvis* :let g:turbux_command_prefix = "be"
+  autocmd BufNewFile,BufEnter */brightbook* :let g:turbux_command_prefix = "be"
   autocmd BufNewFile,BufEnter */wtax* :let g:turbux_command_prefix = "zeus"
 augroup END
 
