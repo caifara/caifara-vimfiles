@@ -25,4 +25,20 @@ require "nvim-treesitter.configs".setup {
 
 require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
+  ensure_installed = { 
+    "bash",
+    "css",
+    "dockerfile",
+    "html",
+    "json",
+    "lua",
+    "markdown",
+    "ruby",
+    "regex",
+    "scss",
+    "tsx",
+    "typescript",
+    "vim",
+    "yaml",
+  },
 }

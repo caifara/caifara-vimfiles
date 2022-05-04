@@ -8,9 +8,9 @@ au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 " autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 autocmd FileType vim setlocal foldmethod=marker
-autocmd filetype javascript.jsx setlocal foldmethod=expr
+autocmd Filetype javascript.jsx setlocal foldmethod=expr
 autocmd FileType javascript setlocal foldmethod=expr
-autocmd filetype typescript setlocal foldmethod=expr
+autocmd Filetype typescript setlocal foldmethod=expr
 autocmd FileType typescript.tsx setlocal foldmethod=expr
 autocmd FileType typescriptreact setlocal foldmethod=expr
 autocmd FileType ruby setlocal foldmethod=expr
