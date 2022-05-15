@@ -14,6 +14,7 @@ autocmd Filetype typescript setlocal foldmethod=expr
 autocmd FileType typescript.tsx setlocal foldmethod=expr
 autocmd FileType typescriptreact setlocal foldmethod=expr
 autocmd FileType ruby setlocal foldmethod=expr
+autocmd FileType yaml setlocal foldmethod=expr
 autocmd FileType json setlocal foldmethod=syntax
 
 " project specifieke autocommands

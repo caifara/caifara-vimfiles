@@ -55,6 +55,7 @@ local keymap = {
   P = {":lua require'telescope.builtin'.grep_string()<CR>", "project wide search word under cursor"},
   s = {"<Plug>SendFocusedTestToTmux", "project wide search word under cursor"},
   S = {"<Plug>SendTestToTmux", "project wide search word under cursor"},
+  Y = {"\"+Y", "yank line to system registry"},
   l = {
     name = "lsp",
     a = { "<Plug>(coc-codeaction)", "code [a]ction" },
@@ -77,7 +78,7 @@ local keymap = {
   ["/"] = {":CommentToggle<CR>", "comment line"}
 }
 
-wk.register(keymap, {prefix= "<leader>"})
+wk.register(keymap, {prefix= "<leader>", noremap=true})
 
 local x_keymap = {
   a = { "<Plug>(coc-codeaction-selected)", "coc code action"},
@@ -87,11 +88,14 @@ local x_keymap = {
   }
 }
 
+wk.register(x_keymap, {prefix = "<leader>", mode = "x"})
+
 local visual_keymap = {
-  s = { ":lua require('spectre').open_visual()<CR>", "search/replace word under cursor" }
+  s = { ":lua require('spectre').open_visual()<CR>", "search/replace word under cursor" },
+  y = {"\"+y", "yank to system registry"},
 }
 
-wk.register(x_keymap, {prefix = "<leader>", mode = "x"})
+wk.register(visual_keymap, {prefix = "<leader>", mode = "v"})
 
 local local_keymap = {
   l = {':PromoteToLet<CR>', 'promote to let'},
