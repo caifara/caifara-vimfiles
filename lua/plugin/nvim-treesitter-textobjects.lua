@@ -23,6 +23,8 @@ require'nvim-treesitter.configs'.setup {
         ["ic"] = "@class.inner",
         ["ab"] = "@block.outer",
         ["ib"] = "@block.inner",
+        ["ap"] = "@parameter.outer",
+        ["ip"] = "@parameter.inner",
 
         -- -- Or you can define your own textobjects like this
         -- ["iF"] = {

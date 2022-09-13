@@ -31,6 +31,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdtree'
 
   Plug 'myusuf3/numbers.vim' " Betere lijnnummering
+
+  Plug 'lukas-reineke/indent-blankline.nvim' " Verticale lijnen
 " }}}
 
 " {{{ typing tools
@@ -39,7 +41,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
   Plug 'AndrewRadev/splitjoin.vim' " wisselen tss block/inline (ook vr hash) met gJ en gS go-join, go-split
 
-  Plug 'Raimondi/delimitMate'
+  Plug 'Raimondi/delimitMate' " autoclose haakjes en zo
 " }}}
 
 " {{{ colorschemes
@@ -65,6 +67,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-rhubarb' " github extensie voor vim-fugitive
   Plug 'airblade/vim-gitgutter'
   Plug 'pwntester/octo.nvim'
+  Plug 'samoshkin/vim-mergetool'
 " }}}
 
 " {{{ Testing
@@ -83,7 +86,7 @@ Plug 'jgdavey/vim-turbux'
   Plug 'mattn/emmet-vim' " xml syntax editing
   Plug 'othree/xml.vim' " xml/html
 
-  Plug 'ap/vim-css-color' " markeren van kleuren in css bestanden in de juiste kleuren
+  " Plug 'ap/vim-css-color' " markeren van kleuren in css bestanden in de juiste kleuren
   Plug 'KabbAmine/vCoolor.vim' " kleuren invoegen (:VCoolor)
 " }}}
 
@@ -97,7 +100,7 @@ Plug 'jgdavey/vim-turbux'
   Plug 'lucapette/vim-ruby-doc' " ruby documentatie'
   Plug 'henrik/vim-ruby-runner'
 " }}}
-
+"
 " {{{ pandoc/markdown
   Plug 'vim-pandoc/vim-pantondoc' " Werken met markdown (pandoc eigenlijk)
   Plug 'vim-pandoc/vim-pandoc-syntax'

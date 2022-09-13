@@ -20,3 +20,7 @@ These vimfiles are for neovim only.
   * ripgrep
 * `:healthcheck` in vim om te zien wat nog nodig is
 * gem rufo en mogelijks een `.rufo`
+
+# Debugging
+
+https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
