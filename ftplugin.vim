@@ -17,13 +17,6 @@ autocmd FileType ruby setlocal foldmethod=expr
 autocmd FileType yaml setlocal foldmethod=expr
 autocmd FileType json setlocal foldmethod=syntax
 
-" project specifieke autocommands
-augroup projectAutocommands
-  autocmd BufNewFile,BufEnter */lichtvis* :let g:turbux_command_prefix = "be"
-  autocmd BufNewFile,BufEnter */brightbook* :let g:turbux_command_prefix = "be"
-  autocmd BufNewFile,BufEnter */wtax* :let g:turbux_command_prefix = "zeus"
-augroup END
-
 augroup filetypedetecters
   au BufRead,BufNewFile *.arb set filetype=ruby
   " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
@@ -31,9 +24,12 @@ augroup filetypedetecters
 augroup END
 
 " https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+" added edit to make sure we fold after loading completely:
+" https://github.com/nvim-treesitter/nvim-treesitter/issues/1424
 augroup remember_folds
   autocmd!
   autocmd BufWinLeave *.* mkview
+  " autocmd BufWinEnter *.* silent! edit | loadview
   autocmd BufWinEnter *.* silent! loadview
 augroup END
 

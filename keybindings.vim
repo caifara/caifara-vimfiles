@@ -44,3 +44,6 @@ nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 nnoremap t :call CocAction('doHover')<CR>
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

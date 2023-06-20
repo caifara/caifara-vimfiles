@@ -67,11 +67,8 @@ if has("autocmd")
         \| exe "normal g'\"" | endif
 endif
 
-" " Use smartcase.
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 set foldenable
-set foldlevel=0
+set foldlevel=1
 set foldlevelstart=0
 " specifies for which commands a fold will be opened
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo

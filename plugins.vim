@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mizlan/iswap.nvim' " swap argumenten, array dingen enz :ISwap
 
   Plug 'sbdchd/neoformat'
-
+  "
   Plug 'mfussenegger/nvim-dap' " Debugging
 
   Plug 'mbbill/undotree'
@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Konfekt/FastFold'
 
   Plug 'windwp/nvim-spectre' " search replace
-
+  "
   Plug 'folke/which-key.nvim'
 
   " Plug '/usr/local/opt/fzf'
@@ -60,6 +60,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'xiyaowong/coc-lightbulb'
 
   Plug 'liuchengxu/vista.vim' " tagbar aan zijkant: :Vista
+" }}}
+
+" {{{ ai
+  Plug 'aduros/ai.vim'
 " }}}
 
 " {{{ git

@@ -1,1 +1,1 @@
-set foldexpr=nvim_treesitter#foldexpr()
+set foldexpr=vim.treesitter.foldexpr()
