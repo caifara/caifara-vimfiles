@@ -37,7 +37,6 @@ wk.setup{
   show_help = true, -- show help message on the command line when the popup is visible
 }
 
-
 local keymap = {
   a = { "<Plug>(coc-codeaction)", "code [a]ction" },
   r = { "<Plug>(coc-rename)", "[c]hange name (rename)" },
@@ -78,7 +77,6 @@ local keymap = {
   },
   ["/"] = {":CommentToggle<CR>", "comment line"}
 }
-
 wk.register(keymap, {prefix= "<leader>", noremap=true})
 
 local x_keymap = {
@@ -88,14 +86,12 @@ local x_keymap = {
     a = { "<Plug>(coc-codeaction-selected)", "coc code action"}
   }
 }
-
 wk.register(x_keymap, {prefix = "<leader>", mode = "x"})
 
 local visual_keymap = {
   s = { ":lua require('spectre').open_visual()<CR>", "search/replace word under cursor" },
   y = {"\"+y", "yank to system registry"},
 }
-
 wk.register(visual_keymap, {prefix = "<leader>", mode = "v"})
 
 local local_keymap = {
@@ -108,7 +104,6 @@ local local_keymap = {
     p = {"viw:lua require('spectre').open_file_search()<CR>", "search in current file"},
   },
 }
-
 wk.register(local_keymap, {prefix="<localleader>"})
 
 local g_keymap = {
@@ -122,3 +117,14 @@ local g_keymap = {
   r = { ":Telescope coc references<CR>", "references" },
 }
 wk.register(g_keymap, {prefix= "g"})
+
+-- local ctrl_keymap = {
+--   a = { ":call codeium#Accept()<CR>" },
+--   Right = { ":call codeium#CycleCompletions(1)<CR>" },
+--   -- Left = { ":call codeium#CycleCompletions(-1)<CR>" },
+--   Left = { ":echo 'werkt'<CR>" },
+--   -- x = { ":call codeium#Clear()<CR>" },
+--   x = { ":echo 'werkt'<CR>" },
+--   y = { ":call codeium#Complete()<CR>" },
+-- }
+-- wk.register(ctrl_keymap, {prefix= "<C>", noremap=true})

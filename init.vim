@@ -10,9 +10,10 @@ lua require('plugin.comment')
 lua require('plugin.telescope')
 lua require('plugin.nvim-dap')
 lua require('plugin.nvim-treesitter-textobjects')
-lua require('plugin.nvim-ts-rainbow')
+lua require('plugin.rainbow-delimiters')
 lua require('plugin.octo')
 lua require('plugin.nvim-autopairs')
+lua require('plugin.chatgpt')
 
 " nodig?
 " MacVIM shift+arrow-keys behavior (required in .vimrc)

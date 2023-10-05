@@ -1,12 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
+" {{{ Common dependencies
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+" }}}
+
 " {{{ extending vim, extra functionality
   Plug 'mileszs/ack.vim' " zoeken: werkt na brew install the_silver_searcher
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'nvim-treesitter/playground'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-  Plug 'p00f/nvim-ts-rainbow' " rainbow parentheses, treesitter versie
+  Plug 'hiphish/rainbow-delimiters.nvim' " rainbow parentheses
   Plug 'mizlan/iswap.nvim' " swap argumenten, array dingen enz :ISwap
 
   Plug 'sbdchd/neoformat'
@@ -23,7 +28,6 @@ call plug#begin('~/.vim/plugged')
 
   " Plug '/usr/local/opt/fzf'
   " Plug 'junegunn/fzf.vim'
-  Plug 'nvim-lua/plenary.nvim' " telescope dependency
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
   Plug 'fannheyward/telescope-coc.nvim'
@@ -63,7 +67,9 @@ call plug#begin('~/.vim/plugged')
 " }}}
 
 " {{{ ai
-  Plug 'aduros/ai.vim'
+  " Plug 'aduros/ai.vim'
+  Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+  Plug 'jackmort/chatgpt.nvim'
 " }}}
 
 " {{{ git
@@ -144,5 +150,7 @@ Plug 'mg979/vim-visual-multi' " multiple cursors
 Plug 'tpope/vim-obsession'
 
 Plug 'junegunn/vader.vim' " vimscript specs
+
+Plug 'vimwiki/vimwiki'
 
 call plug#end()

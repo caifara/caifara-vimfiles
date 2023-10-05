@@ -32,4 +32,3 @@ augroup remember_folds
   " autocmd BufWinEnter *.* silent! edit | loadview
   autocmd BufWinEnter *.* silent! loadview
 augroup END
-
