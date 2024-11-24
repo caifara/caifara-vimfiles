@@ -11,6 +11,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'nvim-treesitter/playground'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'nvim-treesitter/nvim-treesitter-context' " keeps context lines to the top
+
   Plug 'hiphish/rainbow-delimiters.nvim' " rainbow parentheses
   Plug 'mizlan/iswap.nvim' " swap argumenten, array dingen enz :ISwap
 
@@ -20,9 +22,9 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'mbbill/undotree'
 
-  Plug 'Konfekt/FastFold'
+  " Plug 'Konfekt/FastFold'
 
-  Plug 'windwp/nvim-spectre' " search replace
+  Plug 'windwp/nvim-spectre' " search and replace
   "
   Plug 'folke/which-key.nvim'
 
@@ -37,15 +39,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'myusuf3/numbers.vim' " Betere lijnnummering
 
   Plug 'lukas-reineke/indent-blankline.nvim' " Verticale lijnen
-" }}}
-
-" {{{ typing tools
   Plug 'numToStr/Comment.nvim'
   Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround
+  Plug 'tpope/vim-repeat' " repeat (.) toelaten met vim-surround en leap.nvim
   Plug 'AndrewRadev/splitjoin.vim' " wisselen tss block/inline (ook vr hash) met gJ en gS go-join, go-split
 
-  Plug 'Raimondi/delimitMate' " autoclose haakjes en zo
+  Plug 'windwp/nvim-autopairs'
+  Plug 'ggandor/leap.nvim' " general-purpose motion plugin, s{c1}{c2}
+
+  Plug 'asiryk/auto-hlsearch.nvim' " auto remove search highlights
 " }}}
 
 " {{{ colorschemes
@@ -56,7 +58,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'rktjmp/lush.nvim'
   Plug 'ellisonleao/gruvbox.nvim'
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'rebelot/kanagawa.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
 " }}}
 
 " {{{ lsp
@@ -69,7 +72,8 @@ call plug#begin('~/.vim/plugged')
 " {{{ ai
   " Plug 'aduros/ai.vim'
   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
-  Plug 'jackmort/chatgpt.nvim'
+  " Plug 'jackmort/chatgpt.nvim'
+  Plug 'magicalne/nvim.ai', {'branch': 'main'}
 " }}}
 
 " {{{ git
@@ -105,10 +109,10 @@ Plug 'jgdavey/vim-turbux'
   Plug 'tpope/vim-cucumber'
   Plug 'tpope/vim-rails'
   " Plug 'ecomba/vim-ruby-refactoring'
-  Plug 'windwp/nvim-autopairs' " voeg 'end' toe in ruby waar nodig
   Plug 'tpope/vim-haml' " haml and sass runtime files
   Plug 'lucapette/vim-ruby-doc' " ruby documentatie'
   Plug 'henrik/vim-ruby-runner'
+  Plug 'RRethy/nvim-treesitter-endwise' " voeg end to aan blokken
 " }}}
 "
 " {{{ pandoc/markdown

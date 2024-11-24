@@ -14,21 +14,21 @@
 --   }
 -- }
 
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
       init_selection = "gnn",
-      node_incremental = "grn",
+      node_incremental = "v",
+      node_decremental = "V",
       scope_incremental = "grc",
-      node_decremental = "grm",
     },
   },
-}
-
-require'nvim-treesitter.configs'.setup {
+  endwise = { -- dit is de RRethy/nvim-treesitter-endwise plugin
+    enable = true,
+  },
   highlight = { enable = true },
-  ensure_installed = { 
+  ensure_installed = {
     "bash",
     "css",
     "dockerfile",
@@ -43,5 +43,7 @@ require'nvim-treesitter.configs'.setup {
     "typescript",
     "vim",
     "yaml",
+    "xml",
+    "markdown"
   },
 }

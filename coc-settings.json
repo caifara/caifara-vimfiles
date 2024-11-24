@@ -7,6 +7,5 @@
   "eslint.autoFixOnSave": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSave": true,
-  "html.filetypes": ["html", "eruby"],
   "html.format.templating": true
 }

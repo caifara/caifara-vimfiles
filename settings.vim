@@ -57,8 +57,9 @@ highlight clear SignColumn
 " lua require('colorbuddy').colorscheme('spacebuddy')
 " lua vim.cmd('colorscheme modus-operandi')
 set termguicolors
-let g:gruvbox_invert_selection=0
-colorscheme gruvbox
+" let g:gruvbox_invert_selection=0
+" colorscheme gruvbox
+colorscheme kanagawa
 " }}}
 
 " Remember last location in file
@@ -67,9 +68,9 @@ if has("autocmd")
         \| exe "normal g'\"" | endif
 endif
 
-set foldenable
-set foldlevel=1
-set foldlevelstart=0
+" set foldenable
+" set foldlevel=1
+" set foldlevelstart=0
 " specifies for which commands a fold will be opened
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " hi Folded cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
